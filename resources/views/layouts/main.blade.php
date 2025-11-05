@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
-    <header>
+    {{-- <header>
         @include('menu.header')
-    </header>
+    </header> --}}
 
     @include('menu.nav')
 
