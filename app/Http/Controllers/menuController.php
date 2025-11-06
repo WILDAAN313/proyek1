@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-class menuController extends Controller
-{
-    public function index () {
-        return view ('menu');
-}
+class MenuController extends Controller {
+    public function index() {
+        $title = "Menu Sehat";
+        $slug = "menu";
+        return view('pages.menu', compact('title','slug'));
+    }
 }

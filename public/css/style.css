@@ -1,3 +1,39 @@
+/* landing */
+.hero {
+  background: linear-gradient(to bottom right, #2ecc71, #1abc9c);
+  color: white;
+  text-align: center;
+  padding: 120px 20px;
+}
+
+.hero h1 span {
+  color: orange;
+}
+
+.feature-card {
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #e7ffee;
+  transition: 0.3s;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+  padding: 15px 30px;
+}
+
+.footer-hero {
+  background: linear-gradient(to bottom right, #2ecc71, #1abc9c);
+  color: white;
+  text-align: center;
+  padding: 80px 20px;
+}
+
+/* tampilan atas */
 .navbar-brand {
   font-weight: 700;
   font-size: 28px;

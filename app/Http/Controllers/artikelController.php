@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-class artikelController extends Controller
-{
-   public function index () {
-        return view ('artikel');
-}
+class ArtikelController extends Controller {
+    public function index() {
+        $title = "artikel";
+        $slug = "artikel";
+        return view('pages.artikel', compact('title','slug'));
+    }
 }
