@@ -1,39 +1,56 @@
-@extends('layouts.main')
+@extends('layouts.admin')
 
 @section('content')
-<div class="container">
-    <h1>Daftar Menu Sehat</h1>
-    <a href="{{ route('admin.menu.create') }}" class="btn btn-primary mb-3">+ Tambah Menu</a>
+<div class="container-fluid">
+    <h3 class="fw-bold mb-3">Daftar Menu Sehat</h3>
 
-    @if(session('success'))
+    <div class="d-flex justify-content-between mb-3">
+        <form class="d-flex" action="#" method="GET">
+            <input type="text" name="search" class="form-control me-2" placeholder="Cari Jadwal Menu">
+            <button class="btn btn-outline-success" type="submit">🔍</button>
+        </form>
+        <a href="{{ route('admin.menu.create') }}" class="btn btn-success">+ Tambah Menu</a>
+    </div>
+
+    @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <table class="table table-bordered">
-        <thead>
+    <table class="table table-bordered align-middle text-center">
+        <thead class="table-light">
             <tr>
                 <th>No</th>
-                <th>Nama Menu</th>
-                <th>Deskripsi</th>
+                <th>Menu</th>
+                <th>Jadwal</th>
+                <th>Dilihat</th>
                 <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($menu as $m)
+            @forelse ($menu as $index => $item)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $m->nama_menu }}</td>
-                    <td>{{ $m->deskripsi }}</td>
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ $item->nama_menu }}</td>
                     <td>
-                        <a href="{{ route('admin.menu.edit', $m->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('admin.menu.destroy', $m->id) }}" method="POST" style="display:inline-block">
+                        <span class="badge {{ $item->jadwal == 'Sarapan' ? 'bg-warning text-dark' : 'bg-success' }}">
+                            {{ $item->jadwal ?? '-' }}
+                        </span>
+                    </td>
+                    <td>{{ $item->dilihat ?? 0 }}x</td>
+                    <td>
+                        <a href="{{ route('admin.menu.edit', $item->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                        <form action="{{ route('admin.menu.destroy', $item->id) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus?')">Hapus</button>
+                            <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus menu ini?')">Hapus</button>
                         </form>
                     </td>
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="5" class="text-muted">Belum ada data menu</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 </div>

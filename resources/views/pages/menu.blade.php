@@ -1,45 +1,24 @@
-@extends('layouts.main')
+@include('menu.header')
+@include('menu.nav')
 
-@section('title', $title)
+<div class="container py-5">
+    <h1 class="text-center mb-4">Menu Sehat</h1>
 
-@section('content')
-<section id="menu" class="container py-5">
-  <h2 class="text-center mb-4">Menu Sehat</h2>
-
-
-  <div class="banner-menu mb-5">
-<img src="{{ asset('images/gambar_menu.jpg') }}" alt="Menu Sehat" class="img-fluid rounded shadow">
-
-  </div>
-
-
-  <div class="row justify-content-center g-4">
-    <div class="col-md-4">
-      <div class="card menu-card">
-        <img src="/images/salad.jpg" class="card-img-top" alt="Salad Buah">
-        <div class="card-body text-center">
-          <h5 class="card-title">Salad Buah</h5>
-        </div>
-      </div>
+    <div class="row justify-content-center">
+        @forelse ($menus as $menu)
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $menu->nama_menu }}</h5>
+                        <p class="card-text text-muted">{{ $menu->deskripsi }}</p>
+                        <span class="badge bg-success">{{ $menu->jadwal }}</span>
+                    </div>
+                </div>
+            </div>
+        @empty
+            <p class="text-center text-muted">Belum ada menu yang tersedia.</p>
+        @endforelse
     </div>
+</div>
 
-    <div class="col-md-4">
-      <div class="card menu-card">
-        <img src="images/jus buah.jpg" class="card-img-top" alt="Jus Buah">
-        <div class="card-body text-center">
-          <h5 class="card-title">Jus buah</h5>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="card menu-card">
-        <img src="/images/sayuran.jpg" class="card-img-top" alt="Olahan Sayur">
-        <div class="card-body text-center">
-          <h5 class="card-title">Olahan Sayur</h5>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-@endsection
+@include('menu.footer')

@@ -15,23 +15,11 @@ class AdminController extends Controller
         $userCount = User::count();
         $menuCount = Menu::count();
         $artikelCount = Artikel::count();
-
         $menus = Menu::latest()->take(5)->get();
 
-             if ($request->ajax()) {
-            return view('admin.dashboard', compact(
-                'userCount',
-                'menuCount',
-                'artikelCount',
-                'menus'
-            ));
+        if ($request->ajax()) {
+            return view('admin.dashboard', compact('userCount','menuCount','artikelCount','menus'));
         }
-
-        return view('layouts.admin', compact(
-            'userCount',
-            'menuCount',
-            'artikelCount',
-            'menus'
-        ));
+        return view('layouts.admin', compact('userCount','menuCount','artikelCount','menus'));
     }
 }

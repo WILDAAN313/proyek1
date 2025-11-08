@@ -52,25 +52,32 @@
         </div>
     </div>
 
-    <script>
-        $(document).ready(function() {
-            $('a[data-page]').click(function(e) {
-                e.preventDefault();
-                const url = $(this).attr('href');
+   <script>
+$(document).ready(function() {
+    $('a[data-page]').click(function(e) {
+        e.preventDefault();
+        const url = $(this).attr('href');
 
-                $('a[data-page]').removeClass('active');
-                $(this).addClass('active');
+        $('a[data-page]').removeClass('active');
+        $(this).addClass('active');
 
-                $('#content-area').html('<div class="text-center p-5">Loading...</div>');
+        $('#content-area').html('<div class="text-center p-5">Loading...</div>');
 
-                $.get(url, function(data) {
-                    const htmlContent = $(data).find('#content-area').html() || data;
-                    $('#content-area').html(htmlContent);
-                }).fail(function() {
-                    $('#content-area').html('<div class="text-danger p-5">Gagal memuat halaman.</div>');
-                });
-            });
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function(response) {
+                              let content = $(response).find('#content-area').html() || response;
+                $('#content-area').html(content);
+            },
+            error: function(xhr) {
+                console.error(xhr.responseText);
+                $('#content-area').html('<div class="text-danger p-5">Gagal memuat halaman.</div>');
+            }
         });
-    </script>
+    });
+});
+</script>
+
 </body>
 </html>

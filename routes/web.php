@@ -14,14 +14,17 @@ Route::get('/', function () {
 })->name('landing');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/menu', [MenuController::class, 'index'])->name('menu');
+Route::get('/menu', [MenuController::class, 'showUser'])->name('menu');
+Route::get('/menu/{id}', [MenuController::class, 'showDetail'])->name('menu.show');
 Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel');
 Route::match(['get', 'post'], '/kalkulator', [HomeController::class, 'kalkulator'])->name('kalkulator');
 
 
-Route::prefix('admin')->group(function () {
-    Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
-    Route::resource('menu', AdminMenuController::class, ['as' => 'admin']);
-    Route::resource('artikel', AdminArtikelController::class, ['as' => 'admin']);
-    Route::get('/users', [AdminUserController::class, 'index'])->name('admin.users.index');
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('dashboard');
+
+    Route::resource('menu', AdminMenuController::class);
+    Route::resource('artikel', AdminArtikelController::class);
+    
+    Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
 });

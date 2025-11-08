@@ -2,10 +2,23 @@
 
 namespace App\Http\Controllers;
 
-class MenuController extends Controller {
-    public function index() {
-        $title = "Menu Sehat";
-        $slug = "menu";
-        return view('pages.menu', compact('title','slug'));
+use App\Models\Menu;
+use Illuminate\Http\Request;
+
+class MenuController extends Controller
+{
+    
+    public function showUser()
+    {
+        $menus = Menu::latest()->get();
+        return view('pages.menu', compact('menus'));
+    }
+
+    
+    public function showDetail($id)
+    {
+        $menu = Menu::findOrFail($id);
+        $menu->increment('dilihat');
+        return view('pages.menu-detail', compact('menu'));
     }
 }
