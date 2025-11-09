@@ -42,6 +42,7 @@
         <a href="{{ route('admin.dashboard') }}" data-page="dashboard" class="{{ request()->is('admin') ? 'active' : '' }}">🏠 Dashboard</a>
         <a href="{{ route('admin.menu.index') }}" data-page="menu" class="{{ request()->is('admin/menu*') ? 'active' : '' }}">🥗 Menu Sehat</a>
         <a href="{{ route('admin.artikel.index') }}" data-page="artikel" class="{{ request()->is('admin/artikel*') ? 'active' : '' }}">📰 Artikel</a>
+        <a href="{{ route('admin.kategori.index') }}" data-page="kategori"class="{{ request()->is('admin/kategori*') ? 'active' : '' }}">📂 Kategori</a>
         <a href="{{ route('admin.users.index') }}" data-page="users" class="{{ request()->is('admin/users*') ? 'active' : '' }}">👤 Pengguna</a>
         <a href="{{ url('/logout') }}" class="text-danger mt-3">🚪 Log Out</a>
     </div>
