@@ -74,32 +74,12 @@
 <body>
     <div class="sidebar">
         <h4 class="text-success fw-bold mb-4">FitLife.id</h4>
-
-        <a href="{{ route('admin.dashboard') }}" class="{{ request()->is('admin') ? 'active' : '' }}">
-            <i class="bi bi-house-door"></i> Dashboard
-        </a>
-
-        <a href="{{ route('admin.menu.index') }}" class="{{ request()->is('admin/menu*') ? 'active' : '' }}">
-            <i class="bi bi-egg-fried"></i> Menu Sehat
-        </a>
-
-        <a href="{{ route('admin.artikel.index') }}" class="{{ request()->is('admin/artikel*') ? 'active' : '' }}">
-            <i class="bi bi-newspaper"></i> Artikel
-        </a>
-
-        <a href="{{ route('admin.users.index') }}" class="{{ request()->is('admin/users*') ? 'active' : '' }}">
-            <i class="bi bi-person-circle"></i> Pengguna
-        </a>
-
-        <a href="#" class="logout-link d-flex align-items-center px-3 py-2 rounded mb-2"
-            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-            <i class="bi bi-box-arrow-right me-2"></i>
-            <span>Log Out</span>
-        </a>
-
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-            @csrf
-        </form>
+        <a href="{{ route('admin.dashboard') }}" data-page="dashboard" class="{{ request()->is('admin') ? 'active' : '' }}">🏠 Dashboard</a>
+        <a href="{{ route('admin.menu.index') }}" data-page="menu" class="{{ request()->is('admin/menu*') ? 'active' : '' }}">🥗 Menu Sehat</a>
+        <a href="{{ route('admin.artikel.index') }}" data-page="artikel" class="{{ request()->is('admin/artikel*') ? 'active' : '' }}">📰 Artikel</a>
+        <a href="{{ route('admin.kategori.index') }}" data-page="kategori"class="{{ request()->is('admin/kategori*') ? 'active' : '' }}">📂 Kategori</a>
+        <a href="{{ route('admin.users.index') }}" data-page="users" class="{{ request()->is('admin/users*') ? 'active' : '' }}">👤 Pengguna</a>
+        <a href="{{ url('/logout') }}" class="text-danger mt-3">🚪 Log Out</a>
     </div>
 
     <main class="content">

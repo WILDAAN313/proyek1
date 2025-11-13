@@ -2,21 +2,23 @@
 
 @section('content')
 <div class="container mt-4">
-    <h2>Edit Artikel</h2>
-    <form action="{{ route('admin.artikel.update', $artikel->id) }}" method="POST">
+    <h2>Edit Kategori</h2>
+    <form action="{{ route('kategori.update', $kategori->id_kategori) }}" method="POST">
         @csrf
         @method('PUT')
 
         <div class="mb-3">
-            <label class="form-label">Judul Artikel</label>
-            <input type="text" name="judul" value="{{ $artikel->judul }}" class="form-control" required>
+            <label class="form-label">Judul Kategori</label>
+            <input type="text" name="judul" value="{{ $kategori->judul }}" class="form-control" required>
         </div>
+
         <div class="mb-3">
             <label class="form-label">Konten</label>
-            <textarea name="konten" class="form-control" rows="6" required>{{ $artikel->konten }}</textarea>
+            <textarea name="konten" class="form-control" rows="6" required>{{ $kategori->konten }}</textarea>
         </div>
+
         <button type="submit" class="btn btn-success">Perbarui</button>
-        <a href="{{ route('admin.artikel.index') }}" class="btn btn-secondary">Kembali</a>
+        <a href="{{ route('kategori.index') }}" class="btn btn-secondary">Kembali</a>
     </form>
 </div>
 @endsection

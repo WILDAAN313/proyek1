@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Artikel;
+use App\Models\kategori;
 use Illuminate\Http\Request;
 
 class ArtikelController extends Controller
@@ -22,6 +23,7 @@ class ArtikelController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'id_kategori' => 'required|exists:kategori,id_kategori',
             'judul' => 'required',
             'konten' => 'required',
         ]);
@@ -39,6 +41,7 @@ class ArtikelController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
+            'id_kategori' => 'required|exists:kategori,id_kategori',
             'judul' => 'required',
             'konten' => 'required',
         ]);
