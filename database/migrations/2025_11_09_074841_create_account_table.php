@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
             $table->string('nama_lengkap')->nullable();
-            $table->string('username')->unique(); // ← tambahkan kolom username unik
+            $table->string('username')->unique();
             $table->string('email')->unique();
             $table->string('role')->default('user');
             $table->string('password');
