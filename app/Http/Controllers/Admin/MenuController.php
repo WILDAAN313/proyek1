@@ -8,10 +8,10 @@ use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $menu = Menu::all();
-        return view('admin.menu.index', compact('menu'));
+        $menu = Menu::latest()->paginate(10);
+        return view('admin.menu.index', compact('menu')); // full page
     }
 
     public function create()
@@ -26,14 +26,14 @@ class MenuController extends Controller
             'deskripsi' => 'required',
         ]);
 
-        Menu::create($request->all());
+        Menu::create($request->only('nama_menu', 'deskripsi'));
         return redirect()->route('admin.menu.index')->with('success', 'Menu berhasil ditambahkan');
     }
 
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $menu = Menu::findOrFail($id);
-        return view('admin.menu.edit', compact('menu'));
+        return view('admin.menu.edit', compact('menu')); // full page
     }
 
     public function update(Request $request, $id)
@@ -44,7 +44,7 @@ class MenuController extends Controller
         ]);
 
         $menu = Menu::findOrFail($id);
-        $menu->update($request->all());
+        $menu->update($request->only('nama_menu', 'deskripsi'));
 
         return redirect()->route('admin.menu.index')->with('success', 'Menu berhasil diperbarui');
     }
