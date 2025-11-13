@@ -15,7 +15,7 @@ Route::get('/', function () {
 })->name('landing');
 
 Route::get('/auth', function () {
-    return view('auth.auth');
+    return view('auth.index');
 });
 
 Route::get('/login', [AuthCustomController::class, 'index'])->name('auth.index');
