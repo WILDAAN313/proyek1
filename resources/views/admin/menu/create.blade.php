@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('layouts.main')
 
 @section('content')
 <h3 class="fw-bold mb-3">Tambah Menu Baru</h3>
