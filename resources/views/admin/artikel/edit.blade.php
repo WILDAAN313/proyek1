@@ -1,21 +1,36 @@
-@extends('layouts.main')
+@extends('layouts.admin')
 
 @section('content')
 <div class="container mt-4">
-    <h2>Edit Artikel</h2>
-    <form action="{{ route('admin.artikel.update', $artikel->id) }}" method="POST">
-        @csrf
-        @method('PUT')
+    <h3>Edit Artikel</h3>
+
+    <form action="{{ route('admin.artikel.update', $artikel->id) }}" method="POST" enctype="multipart/form-data">
+        @csrf @method('PUT')
 
         <div class="mb-3">
-            <label class="form-label">Judul Artikel</label>
-            <input type="text" name="judul" value="{{ $artikel->judul }}" class="form-control" required>
+            <label>Judul</label>
+            <input type="text" name="judul" class="form-control" value="{{ $artikel->judul }}" required>
         </div>
+
         <div class="mb-3">
-            <label class="form-label">Konten</label>
-            <textarea name="konten" class="form-control" rows="6" required>{{ $artikel->konten }}</textarea>
+            <label>Penulis</label>
+            <input type="text" name="penulis" class="form-control" value="{{ $artikel->penulis }}">
         </div>
-        <button type="submit" class="btn btn-success">Perbarui</button>
+
+        <div class="mb-3">
+            <label>Isi</label>
+            <textarea name="isi" rows="6" class="form-control" required>{{ $artikel->isi }}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label>Gambar</label><br>
+            @if($artikel->gambar)
+                <img src="{{ asset('storage/'.$artikel->gambar) }}" width="180" class="mb-2 rounded">
+            @endif
+            <input type="file" name="gambar" class="form-control">
+        </div>
+
+        <button class="btn btn-success">Update</button>
         <a href="{{ route('admin.artikel.index') }}" class="btn btn-secondary">Kembali</a>
     </form>
 </div>

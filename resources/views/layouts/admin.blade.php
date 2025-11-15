@@ -25,7 +25,7 @@
             display: flex;
             align-items: center;
             padding: 10px 15px;
-            color: #333;
+            color: #333;    
             text-decoration: none;
             border-radius: 8px;
             margin-bottom: 8px;

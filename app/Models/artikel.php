@@ -13,8 +13,12 @@ class Artikel extends Model
 
     protected $fillable = [
         'judul',
+        'slug',
         'isi',
         'penulis',
+        'kategori',
         'gambar',
+        'is_featured',
+        'dibaca',
     ];
 }

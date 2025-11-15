@@ -10,7 +10,7 @@
 
 <body class="bg-green-50 font-sans text-gray-800">
 
-    <!-- Navbar -->
+
     <nav class="flex justify-between items-center px-8 py-4 bg-white shadow-sm">
         <div class="flex items-center space-x-2">
             <img src="{{ asset('img/logo.png') }}" alt="FitLife Logo" class="h-8 w-8">
@@ -24,7 +24,7 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+
     <section class="relative bg-green-600 text-white text-center py-24 overflow-hidden">
         <div class="absolute inset-0 bg-cover bg-center opacity-20"
             style="background-image: url('{{ asset('img/healthy-bg.jpg') }}')"></div>
