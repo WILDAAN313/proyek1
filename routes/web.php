@@ -42,7 +42,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::resource('menu', AdminMenuController::class);
     Route::resource('artikel', AdminArtikelController::class);
-    Route::resource('User', AdminUserController::class);
+    Route::resource('users', AdminUserController::class);
     Route::resource('kategori', AdminArtikelController::class);
     
     Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');

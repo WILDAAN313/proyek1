@@ -10,16 +10,24 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+
     public function index(Request $request)
     {
         $userCount = Account::count();
+        $activeUserCount = Account::where('is_active', true)->count();
         $menuCount = Menu::count();
         $artikelCount = Artikel::count();
-        $menus = Menu::latest()->take(5)->get();
 
-        // if ($request->ajax()) {
-        //     return view('admin.dashboard', compact('userCount','menuCount','artikelCount','menus'));
-        // }
-        return view('admin.dashboard', compact('userCount','menuCount','artikelCount','menus'));
+        $menus = Menu::latest()->take(5)->get();
+        $latestUsers = Account::latest()->take(5)->get();
+
+        return view('admin.dashboard', compact(
+            'userCount',
+            'activeUserCount',
+            'menuCount',
+            'artikelCount',
+            'menus',
+            'latestUsers'
+        ));
     }
 }
