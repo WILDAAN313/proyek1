@@ -41,17 +41,23 @@
                             <td>{{ $user->email }}</td>
                             <td><span class="badge bg-info text-dark">{{ $user->role ?? 'User' }}</span></td>
                             <td>
-                                <span class="badge {{ $user->is_active ?? true ? 'bg-success' : 'bg-secondary' }}">
-                                    {{ $user->is_active ?? true ? 'Aktif' : 'Nonaktif' }}
+                                <span class="badge {{ $user->is_active ? 'bg-success' : 'bg-secondary' }}">
+                                    {{ $user->is_active ? 'Aktif' : 'Nonaktif' }}
                                 </span>
                             </td>
                             <td>
-                                <button class="btn btn-sm btn-primary" disabled title="Belum ada halaman edit">
+                                <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-sm btn-primary">
                                     <i class="bi bi-pencil-square me-1"></i> Edit
-                                </button>
-                                <button class="btn btn-sm btn-danger" disabled title="Belum ada fitur hapus">
-                                    <i class="bi bi-trash me-1"></i> Hapus
-                                </button>
+                                </a>
+                                <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST"
+                                    class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-sm btn-danger"
+                                        onclick="return confirm('Yakin ingin menghapus pengguna ini?')">
+                                        <i class="bi bi-trash me-1"></i> Hapus
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @empty

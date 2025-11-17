@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\kategoriController;
+use App\Models\kategori;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
@@ -9,7 +11,8 @@ use App\Http\Controllers\AuthCustomController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\MenuController as AdminMenuController;
 use App\Http\Controllers\Admin\ArtikelController as AdminArtikelController;
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\KategoriController as AdminKategoriController;
 
 Route::get('/', function () {
     return view('landing');
@@ -39,6 +42,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::resource('menu', AdminMenuController::class);
     Route::resource('artikel', AdminArtikelController::class);
-
-    Route::get('users', [UserController::class, 'index'])->name('users.index');
+    Route::resource('User', AdminUserController::class);
+    Route::resource('kategori', AdminArtikelController::class);
+    
+    Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
 });

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @extends('layouts.admin')
+=======
+@extends('layouts.main')
+>>>>>>> 530378fdec9747212f25d0f45cb49dc5a49f559d
 
 @section('content')
 <h3 class="fw-bold mb-3">Tambah Menu Baru</h3>
@@ -6,37 +10,31 @@
 <form action="{{ route('admin.menu.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
 
-    <!-- NAMA MENU -->
     <div class="mb-3">
         <label>Nama Menu</label>
         <input type="text" name="nama_menu" class="form-control" required>
     </div>
 
-    <!-- DESKRIPSI -->
     <div class="mb-3">
         <label>Deskripsi</label>
         <textarea name="deskripsi" class="form-control" rows="3" required></textarea>
     </div>
 
-    <!-- KALORI (TAMBAHAN) -->
     <div class="mb-3">
         <label>Kalori (kcal)</label> 
         <input type="number" name="calories" class="form-control" required>
     </div>
 
-    <!-- WAKTU MEMASAK (TAMBAHAN) -->
     <div class="mb-3">
         <label>Waktu Memasak (menit)</label>
         <input type="number" name="waktu" class="form-control" required>
     </div>
 
-    <!-- BAHAN-BAHAN (TAMBAHAN) -->
     <div class="mb-3">
         <label>Bahan-bahan</label>
         <textarea name="bahan_bahan" class="form-control" rows="3" placeholder="contoh: Pisang, Strawberry, Granola"></textarea>
     </div>
 
-    <!-- JADWAL MAKAN -->
     <div class="mb-3">
         <label>Jadwal</label>
         <select name="jadwal" class="form-select">
@@ -46,7 +44,6 @@
         </select>
     </div>
 
-    <!-- GAMBAR MENU (TAMBAHAN) -->
     <div class="mb-3">
         <label>Foto Menu</label>
         <input type="file" name="gambar" class="form-control">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Artikel;
+use App\Models\kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -24,9 +25,15 @@ class ArtikelController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+<<<<<<< HEAD
             'judul'  => 'required',
             'isi'    => 'required',
             'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+=======
+            'id_kategori' => 'required|exists:kategori,id_kategori',
+            'judul' => 'required',
+            'konten' => 'required',
+>>>>>>> 530378fdec9747212f25d0f45cb49dc5a49f559d
         ]);
 
         $fileName = null;
@@ -58,9 +65,15 @@ class ArtikelController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
+<<<<<<< HEAD
             'judul'  => 'required',
             'isi'    => 'required',
             'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+=======
+            'id_kategori' => 'required|exists:kategori,id_kategori',
+            'judul' => 'required',
+            'konten' => 'required',
+>>>>>>> 530378fdec9747212f25d0f45cb49dc5a49f559d
         ]);
 
         $artikel = Artikel::findOrFail($id);
