@@ -8,22 +8,22 @@
         @csrf
 
         <div class="mb-3">
-            <label>Judul</label>
-            <input type="text" name="judul" class="form-control" required>
+            <label class="form-label">Judul</label>
+            <input type="text" name="judul" class="form-control" value="{{ old('judul') }}" required>
         </div>
 
         <div class="mb-3">
-            <label>Penulis</label>
-            <input type="text" name="penulis" class="form-control">
+            <label class="form-label">Penulis</label>
+            <input type="text" name="penulis" class="form-control" value="{{ old('penulis') }}">
         </div>
 
         <div class="mb-3">
-            <label>Isi</label>
-            <textarea name="isi" rows="6" class="form-control" required></textarea>
+            <label class="form-label">Isi</label>
+            <textarea name="isi" rows="6" class="form-control" required>{{ old('isi') }}</textarea>
         </div>
 
         <div class="mb-3">
-            <label>Gambar</label>
+            <label class="form-label">Gambar</label>
             <input type="file" name="gambar" class="form-control">
         </div>
 

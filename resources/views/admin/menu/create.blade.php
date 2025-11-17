@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-@extends('layouts.admin')
-=======
 @extends('layouts.main')
->>>>>>> 530378fdec9747212f25d0f45cb49dc5a49f559d
 
 @section('content')
 <h3 class="fw-bold mb-3">Tambah Menu Baru</h3>

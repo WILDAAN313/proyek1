@@ -37,7 +37,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($menu as $index => $item)
+                    @forelse ($menus as $index => $item)
                         <tr>
                             <td>{{ $index + 1 }}</td>
                             <td class="text-start">{{ $item->nama_menu }}</td>
