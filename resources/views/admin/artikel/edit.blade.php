@@ -7,6 +7,19 @@
     <form action="{{ route('admin.artikel.update', $artikel->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
+        
+        <div class="mb-3">
+            <label class="form-label">Kategori</label>
+            <select name="id_kategori" class="form-control" required>
+                <option value="">-- Pilih Kategori --</option>
+                @foreach ($kategori as $k)
+                    <option value="{{ $k->id_kategori }}"
+                        {{ $artikel->id_kategori == $k->id_kategori ? 'selected' : '' }}>
+                        {{ $k->nama_kategori }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
 
         <div class="mb-3">
             <label class="form-label">Judul</label>

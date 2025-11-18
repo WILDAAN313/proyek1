@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\kategoriController;
 use App\Models\kategori;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -43,7 +42,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('menu', AdminMenuController::class);
     Route::resource('artikel', AdminArtikelController::class);
     Route::resource('users', AdminUserController::class);
-    Route::resource('kategori', AdminArtikelController::class);
-    
+    Route::resource('kategori', AdminKategoriController::class);
     Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
 });

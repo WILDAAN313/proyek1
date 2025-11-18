@@ -27,7 +27,7 @@
             overflow-y: auto;
         }
 
-<<<<<<< HEAD
+
         .sidebar a {
             display: flex;
             align-items: center;
@@ -49,7 +49,7 @@
             background: #4CAF50;
             color: #fff;
         }
-=======
+        
            .content {
             margin-left: 230px;
             /* pas dengan width sidebar */

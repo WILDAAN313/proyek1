@@ -15,7 +15,7 @@ class KategoriController extends Controller
 
         $kategori = Kategori::all();
 
-        return view('kategori.index', compact('title', 'slug', 'kategori'));
+        return view('admin.kategori.index', compact('title', 'slug', 'kategori'));
     }
 
     public function create()
@@ -23,7 +23,7 @@ class KategoriController extends Controller
         $title = 'Tambah Kategori';
         $slug = 'Kategori';
 
-        return view('kategori.create', compact('title', 'slug'));
+        return view('admin.kategori.create', compact('title', 'slug'));
     }
 
     public function store(Request $request)
@@ -36,7 +36,7 @@ class KategoriController extends Controller
             'nama_kategori' => $request->nama_kategori,
         ]);
 
-        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil ditambahkan!');
+        return redirect()->route('admin.kategori.index')->with('success', 'Kategori berhasil ditambahkan!');
     }
 
     public function edit(int $id)
@@ -46,7 +46,7 @@ class KategoriController extends Controller
 
         $kategori = Kategori::findOrFail($id);
 
-        return view('kategori.edit', compact('title', 'slug', 'kategori'));
+        return view('admin.kategori.edit', compact('title', 'slug', 'kategori'));
     }
 
     public function update(Request $request, int $id)
@@ -61,13 +61,13 @@ class KategoriController extends Controller
             'nama_kategori' => $request->nama_kategori,
         ]);
 
-        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil diperbarui!');
+        return redirect()->route('admin.kategori.index')->with('success', 'Kategori berhasil diperbarui!');
     }
 
     public function destroy(int $id)
     {
         Kategori::destroy($id);
 
-        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil dihapus!');
+        return redirect()->route('admin.kategori.index')->with('success', 'Kategori berhasil dihapus!');
     }
 }

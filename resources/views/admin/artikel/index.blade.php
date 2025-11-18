@@ -25,7 +25,7 @@
 
     <div class="table-responsive">
         <table class="table table-bordered align-middle text-center">
-            <thead class="table-dark">
+            <thead class="table-light">
                 <tr>
                     <th width="60">#</th>
                     <th>Judul</th>

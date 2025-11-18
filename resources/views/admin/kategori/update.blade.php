@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.admin')
 @section('content')
     <h2>Update Kategori</h2>
     <form method="POST" action="/kategori/update/{{ $kategori->id_kategori }}">

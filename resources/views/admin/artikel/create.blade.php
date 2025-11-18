@@ -8,10 +8,19 @@
         @csrf
 
         <div class="mb-3">
+            <label class="form-label">Kategori</label>
+            <select name="id_kategori" class="form-control" required>
+                <option value="">-- Pilih Kategori --</option>
+                @foreach ($kategori as $k)
+                    <option value="{{ $k->id_kategori }}">{{ $k->nama_kategori }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="mb-3">
             <label class="form-label">Judul</label>
             <input type="text" name="judul" class="form-control" value="{{ old('judul') }}" required>
         </div>
-
+        
         <div class="mb-3">
             <label class="form-label">Penulis</label>
             <input type="text" name="penulis" class="form-control" value="{{ old('penulis') }}">
