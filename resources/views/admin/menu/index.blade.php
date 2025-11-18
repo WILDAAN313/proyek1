@@ -34,6 +34,7 @@
                         <th>Menu</th>
                         <th>Jadwal</th>
                         <th>Dilihat</th>
+                        <th>Aksi</th> {{-- ditambahkan --}}
                     </tr>
                 </thead>
                 <tbody>

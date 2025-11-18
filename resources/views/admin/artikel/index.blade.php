@@ -5,7 +5,6 @@
         <h3 class="fw-bold mb-3">Daftar Artikel</h3>
 
         <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
-            {{-- Search --}}
             <form class="d-flex" action="#" method="GET">
                 <div class="input-group">
                     <input type="text" name="search" class="form-control" placeholder="Cari Kategori Artikel"
@@ -16,7 +15,6 @@
                 </div>
             </form>
 
-            {{-- Tambah Artikel --}}
             <a href="{{ route('admin.artikel.create') }}" class="btn btn-success">
                 <i class="bi bi-plus-lg me-1"></i> Tambah Artikel
             </a>
