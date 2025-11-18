@@ -17,7 +17,20 @@ class Account extends Authenticatable
         'email',
         'password',
         'role',
+        'is_active',
+        'last_login_at'
     ];
 
-    public $timestamps = false;
+
+    public $timestamps = true;
+
+    protected $casts = [
+        'is_active'     => 'boolean',
+        'last_login_at' => 'datetime',
+    ];
+
+    public function getNameAttribute()
+    {
+        return $this->nama_lengkap ?? $this->username;
+    }
 }

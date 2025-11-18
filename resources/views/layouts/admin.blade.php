@@ -27,8 +27,30 @@
             overflow-y: auto;
         }
 
-        /* FIX: Hilangkan jarak */
-        .content {
+<<<<<<< HEAD
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            color: #333;    
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            transition: .3s;
+        }
+
+        .sidebar a i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .sidebar a.active,
+        .sidebar a:hover {
+            background: #4CAF50;
+            color: #fff;
+        }
+=======
+           .content {
             margin-left: 230px;
             /* pas dengan width sidebar */
             padding: 20px;

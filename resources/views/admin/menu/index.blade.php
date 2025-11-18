@@ -5,7 +5,7 @@
         <h3 class="fw-bold mb-3">Daftar Menu Sehat</h3>
 
         <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
-            {{-- Search --}}
+          
             <form class="d-flex" action="#" method="GET">
                 <div class="input-group">
                     <input type="text" name="search" class="form-control" placeholder="Cari Jadwal Menu"
@@ -16,8 +16,7 @@
                 </div>
             </form>
 
-            {{-- Tambah Menu --}}
-            <a href="{{ route('admin.menu.create') }}" class="btn btn-success">
+                 <a href="{{ route('admin.menu.create') }}" class="btn btn-success">
                 <i class="bi bi-plus-lg me-1"></i> Tambah Menu
             </a>
         </div>
@@ -34,11 +33,11 @@
                         <th>Menu</th>
                         <th>Jadwal</th>
                         <th>Dilihat</th>
-                        <th>Aksi</th> {{-- ditambahkan --}}
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($menu as $index => $item)
+                    @forelse ($menus as $index => $item)
                         <tr>
                             <td>{{ $index + 1 }}</td>
                             <td class="text-start">{{ $item->nama_menu }}</td>
