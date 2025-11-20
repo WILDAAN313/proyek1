@@ -43,7 +43,7 @@
                     <td class="text-start">{{ $d->judul }}</td>
                     <td>
                         <span class="badge bg-success">
-                            {{ optional($d->kategori)->nama_kategori ?? '-' }}
+                            {{ $d->kategori ?? '-' }}
                         </span>
                     </td>
                     <td>{{ $d->penulis ?? '-' }}</td>

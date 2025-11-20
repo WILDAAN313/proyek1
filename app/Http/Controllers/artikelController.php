@@ -11,9 +11,11 @@ class ArtikelController extends Controller
         $title = "artikel";
         $slug = "artikel";
 
+        $featured = Artikel::where('is_featured', true)->latest()->first();
+        if (! $featured) {
+            $featured = Artikel::latest()->first();
+        }
         $artikels = Artikel::latest()->get();
-
-        $featured = Artikel::latest()->first();
 
         return view('pages.artikel', compact(
             'title',
@@ -29,6 +31,8 @@ class ArtikelController extends Controller
 
         $artikel->increment('dibaca');
 
-        return view('pages.artikel-detail', compact('artikel'));
+        $artikels = Artikel::latest()->take(4)->get();
+
+        return view('pages.artikel-detail', compact('artikel', 'artikels'));
     }
 }

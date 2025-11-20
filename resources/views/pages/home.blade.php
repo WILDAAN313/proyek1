@@ -5,153 +5,231 @@
 @section('content')
 
 <style>
-    :root {
-        --fitlife-green: #33aa66;
-        --fitlife-green-dark: #2f8b57;
-        --fitlife-text-dark: #3a3a3a;
-        --fitlife-bg-light: #f9fafa;
+    .hero-section {
+        background: linear-gradient(120deg, #1fb879 0%, #0da36b 100%);
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+        padding: 80px 0 70px;
     }
 
-    .artikel-wrapper {
-        background-color: var(--fitlife-bg-light);
-        padding-top: 40px;
-        padding-bottom: 60px;
+    .hero-section::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: url('{{ asset('images/sayuran.jpg') }}') center/cover no-repeat;
+        opacity: 0.12;
+        pointer-events: none;
     }
 
-    .carousel-inner img {
-        height: 420px;
+    .hero-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero-illustration {
+        position: relative;
+        z-index: 1;
+        border-radius: 22px;
+        overflow: hidden;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-illustration img {
+        width: 100%;
+        height: 360px;
         object-fit: cover;
-        filter: brightness(92%);
     }
 
-    .artikel-section h2 {
-        font-size: 32px;
-        font-weight: 700;
-        color: var(--fitlife-green); 
-        letter-spacing: 1px;
-        text-transform: uppercase;
-    }
-
-    .artikel-card {
-        border: none;
-        background: #ffffff;
-        transition: all .3s ease;
-        border-radius: 16px;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.08); 
-        overflow: hidden; 
-      }
-
-    .artikel-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 28px rgba(0,0,0,0.12); 
-            }
-
-    .artikel-img {
-        width: 160px;
-        height: 120px;
-        object-fit: cover;
-        border-radius: 14px; 
-    }
-
-    .artikel-card .card-title {
-        color: var(--fitlife-green);
-        font-weight: 700;
-    }
-
-    .artikel-card .card-text {
-        color: #555; 
-        font-size: 0.95rem;
-    }
-
-    .btn-fitlife {
-        background-color: var(--fitlife-green);
-        color: white;
+    .capsule-badge {
+        display: inline-block;
+        background: rgba(255,255,255,0.16);
+        color: #fff;
+        border-radius: 999px;
+        padding: 8px 16px;
         font-weight: 600;
-        border-radius: 50px; 
-        padding: 8px 22px;
-        text-decoration: none;
-        transition: all .3s ease;
-        border: none;
-        box-shadow: 0 4px 15px rgba(51,170,102,0.3); 
-        display: inline-block; 
+        letter-spacing: 0.5px;
     }
 
-    .btn-fitlife:hover {
-        background-color: var(--fitlife-green-dark);
-        color: white;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(51,170,102,0.4);
+    .feature-section {
+        padding: 70px 0 50px;
+        background: #f7fbf8;
     }
 
+    .fitlife-card {
+        border: 1px solid #e3efe6;
+        border-radius: 16px;
+        background: #fff;
+        padding: 22px;
+        height: 100%;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+        transition: all .2s ease;
+    }
+
+    .fitlife-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 36px rgba(0,0,0,0.08);
+    }
+
+    .fitlife-icon {
+        width: 48px;
+        height: 48px;
+        background: #e7f8ef;
+        color: #0da36b;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        margin-bottom: 14px;
+    }
+
+    .cta-section {
+        background: linear-gradient(120deg, #1fb879 0%, #0aa56a 100%);
+        color: #fff;
+        padding: 60px 0;
+    }
+
+    .pill-btn {
+        border-radius: 999px;
+        padding: 10px 20px;
+        font-weight: 600;
+    }
+
+    .mini-card {
+        border-radius: 14px;
+        border: 1px solid #e5ece8;
+        padding: 16px;
+        background: #fff;
+        box-shadow: 0 10px 26px rgba(0,0,0,0.05);
+        height: 100%;
+    }
 </style>
 
-<div class="container text-center">
-    <div id="carouselExampleIndicators" class="carousel slide mb-5 shadow-sm rounded" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></button>
-        </div>
-        <div class="carousel-inner rounded-4 overflow-hidden">
-            <div class="carousel-item active">
-                <img src="{{ asset('images/gambar_menu.jpg') }}" class="d-block w-100" alt="Gambar 1">
-            </div>
-            <div class="carousel-item">
-                <img src="{{ asset('images/sayuran.jpg') }}" class="d-block w-100" alt="Gambar 2">
-            </div>
-            <div class="carousel-item">
-                <img src="{{ asset('images/salad.jpg') }}" class="d-block w-100" alt="Gambar 3">
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
-        </button>
-    </div>
-</div>
-
-<div class="artikel-wrapper">
-    <div class="container text-center">
-        <div class="artikel-section">
-
-            <h2 class="mb-4">Artikel Kesehatan</h2>
-            <div class="card mb-4 p-3 d-flex flex-row align-items-center artikel-card">
-                <img src="{{ asset('images/sayuran.jpg') }}" alt="Sayuran" class="artikel-img me-3">
-                <div class="card-body text-start">
-                    <h5 class="card-title">Manfaat Sayuran Hijau</h5>
-                    <p class="card-text">
-                        Sayuran hijau kaya akan serat, vitamin, dan mineral yang membantu menjaga tubuh tetap bugar.
-                    </p>
-                                      <a href="/artikel" class="btn-fitlife mt-2">Baca Selengkapnya</a>
+<section class="hero-section">
+    <div class="container hero-content">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-6">
+                <span class="capsule-badge mb-3">Hidup lebih sehat dan bahagia</span>
+                <h1 class="display-5 fw-bold mb-3">Selamat Datang di <span style="color:#ffe66d;">Fitlife.id</span></h1>
+                <p class="lead mb-4">Platform manajemen diet dan pola makan digital untuk hidup yang lebih sehat dengan menu lezat, artikel inspiratif, dan kalkulator BMI.</p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="{{ route('auth.index') }}" class="btn btn-light pill-btn fw-semibold">Mulai Sekarang</a>
+                    <a href="#fitur" class="btn btn-outline-light pill-btn">Pelajari Lebih Lanjut</a>
                 </div>
             </div>
-
-            <div class="card mb-4 p-3 d-flex flex-row align-items-center artikel-card">
-                <img src="{{ asset('images/salad.jpg') }}" alt="Salad" class="artikel-img me-3">
-                <div class="card-body text-start">
-                    <h5 class="card-title">Rahasia Salad Buah Segar</h5>
-                    <p class="card-text">
-                        Kombinasi buah segar memberikan energi alami dan antioksidan sangat baik untuk tubuh.
-                    </p>
-                    <a href="/artikel" class="btn-fitlife mt-2">Baca Selengkapnya</a>
+            <div class="col-lg-6">
+                <div class="hero-illustration">
+                    <img src="{{ asset('images/gambar_menu.jpg') }}" alt="Pilihan menu sehat">
                 </div>
             </div>
-
-            <div class="card mb-4 p-3 d-flex flex-row align-items-center artikel-card">
-                <img src="{{ asset('images/jus buah.jpg') }}" alt="Jus Buah" class="artikel-img me-3">
-                <div class="card-body text-start">
-                    <h5 class="card-title">Pentingnya Konsumsi Buah</h5>
-                    <p class="card-text">
-                        Buah tidak hanya menjaga kesehatan tetapi juga mampu meningkatkan mood harian.
-                    </p>
-                    <a href="/artikel" class="btn-fitlife mt-2">Baca Selengkapnya</a>
-                </div>
-            </div>
-
         </div>
     </div>
-</div>
+</section>
+
+<section id="fitur" class="feature-section">
+    <div class="container">
+        <div class="text-center mb-4">
+            <h2 class="fw-bold">Fitur Unggulan FitLife.id</h2>
+            <p class="text-muted">Dapatkan semua yang anda butuhkan untuk mencapai tujuan kesehatan anda</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="fitlife-card text-center h-100">
+                    <div class="fitlife-icon mx-auto mb-2"><i class="bi bi-activity"></i></div>
+                    <h5 class="fw-bold mb-2">Kalkulator BMI</h5>
+                    <p class="text-muted small">Hitung indeks massa tubuh anda dan dapatkan rekomendasi berat badan ideal.</p>
+                    <a href="{{ route('kalkulator') }}" class="btn btn-fitlife mt-2 w-100">Lihat Detail</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="fitlife-card text-center h-100">
+                    <div class="fitlife-icon mx-auto mb-2"><i class="bi bi-egg-fried"></i></div>
+                    <h5 class="fw-bold mb-2">Menu Sehat</h5>
+                    <p class="text-muted small">Temukan berbagai pilihan menu makanan sehat untuk diet anda.</p>
+                    <a href="{{ route('menu') }}" class="btn btn-fitlife mt-2 w-100">Lihat Detail</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="fitlife-card text-center h-100">
+                    <div class="fitlife-icon mx-auto mb-2"><i class="bi bi-journal-text"></i></div>
+                    <h5 class="fw-bold mb-2">Artikel</h5>
+                    <p class="text-muted small">Baca artikel dan tips seputar diet serta pola hidup sehat.</p>
+                    <a href="{{ route('artikel.index') }}" class="btn btn-fitlife mt-2 w-100">Lihat Detail</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-7">
+                <div class="fitlife-card h-100">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="fw-bold mb-0">Menu Sehat Terbaru</h5>
+                        <a href="{{ route('menu') }}" class="text-success">Lihat semua</a>
+                    </div>
+                    <div class="row g-3">
+                        @forelse($featuredMenus as $menu)
+                            <div class="col-md-6">
+                                <div class="mini-card h-100">
+                                    <div class="d-flex align-items-center">
+                                        <div class="me-3">
+                                            <img src="{{ $menu->gambar ? Storage::url($menu->gambar) : 'https://via.placeholder.com/90x70' }}" class="rounded" width="90" height="70" alt="{{ $menu->nama_menu }}">
+                                        </div>
+                                        <div>
+                                            <h6 class="fw-bold mb-1">{{ $menu->nama_menu }}</h6>
+                                            <p class="small text-muted mb-2">{{ Str::limit($menu->deskripsi, 80) }}</p>
+                                            <a href="{{ route('menu.show', $menu->id) }}" class="text-success fw-semibold small">Lihat menu</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @empty
+                            <div class="col-12">
+                                <p class="text-muted mb-0">Belum ada menu yang tersedia.</p>
+                            </div>
+                        @endforelse
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="fitlife-card h-100">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="fw-bold mb-0">Artikel Terbaru</h5>
+                        <a href="{{ route('artikel.index') }}" class="text-success">Lihat semua</a>
+                    </div>
+                    @forelse($latestArticles as $artikel)
+                        <div class="mini-card mb-3">
+                            <div class="d-flex">
+                                <div class="me-3">
+                                    <img src="{{ $artikel->gambar ? Storage::url($artikel->gambar) : 'https://via.placeholder.com/80x80' }}" class="rounded" width="80" height="80" alt="{{ $artikel->judul }}">
+                                </div>
+                                <div>
+                                    <div class="small text-success fw-semibold mb-1">{{ $artikel->kategori ?? 'Artikel' }}</div>
+                                    <h6 class="fw-bold mb-1">{{ $artikel->judul }}</h6>
+                                    <p class="small text-muted mb-2">{{ Str::limit(strip_tags($artikel->isi), 80) }}</p>
+                                    <a href="{{ route('artikel.show', $artikel->slug) }}" class="text-success small fw-semibold">Baca selengkapnya</a>
+                                </div>
+                            </div>
+                        </div>
+                    @empty
+                        <p class="text-muted mb-0">Belum ada artikel.</p>
+                    @endforelse
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section text-center">
+    <div class="container">
+        <h2 class="fw-bold mb-2">Siap Memulai Perjalanan Sehat Anda?</h2>
+        <p class="mb-4">Bergabunglah dengan ribuan pengguna yang telah merasakan manfaat hidup lebih sehat.</p>
+        <a href="{{ route('kalkulator') }}" class="btn btn-light pill-btn">Hitung BMI Sekarang</a>
+    </div>
+</section>
 
 @endsection

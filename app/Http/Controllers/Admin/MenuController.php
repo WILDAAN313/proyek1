@@ -23,16 +23,12 @@ class MenuController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'nama_menu' => 'required',
-            'deskripsi' => 'nullable',
-            'kalori' => 'nullable|integer',
-            'waktu' => 'nullable|integer',
-            'kategori' => 'nullable',
-            'bahan' => 'nullable',
+            'nama_menu' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
             'gambar' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:3048',
         ]);
 
-               if ($request->hasFile('gambar')) {
+        if ($request->hasFile('gambar')) {
             $data['gambar'] = $request->file('gambar')->store('menu', 'public');
         }
 
@@ -53,12 +49,8 @@ class MenuController extends Controller
         $menu = Menu::findOrFail($id);
 
         $data = $request->validate([
-            'nama_menu' => 'required',
-            'deskripsi' => 'nullable',
-            'kalori' => 'nullable|integer',
-            'waktu' => 'nullable|integer',
-            'kategori' => 'nullable',
-            'bahan' => 'nullable',
+            'nama_menu' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
             'gambar' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:3048',
         ]);
 

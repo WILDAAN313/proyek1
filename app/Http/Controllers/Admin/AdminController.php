@@ -14,7 +14,10 @@ class AdminController extends Controller
     public function index(Request $request)
     {
         $userCount = Account::count();
-        $activeUserCount = Account::where('is_active', true)->count();
+        // hitung user aktif hanya jika kolom tersedia
+        $activeUserCount = \Illuminate\Support\Facades\Schema::hasColumn('accounts', 'is_active')
+            ? Account::where('is_active', true)->count()
+            : 0;
         $menuCount = Menu::count();
         $artikelCount = Artikel::count();
 

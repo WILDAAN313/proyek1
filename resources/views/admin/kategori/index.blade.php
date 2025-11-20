@@ -17,7 +17,7 @@
     <table class="table table-bordered table-striped">
         <thead class="table-light">
             <tr>
-                <th>ID Kategori</th>
+                <th>No</th>
                 <th>Nama Kategori</th>
                 <th>Aksi</th>
             </tr>

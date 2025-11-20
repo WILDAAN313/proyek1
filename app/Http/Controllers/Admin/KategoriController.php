@@ -29,7 +29,7 @@ class KategoriController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_kategori' => 'required|string|max:255|unique:kategoris,nama_kategori',
+            'nama_kategori' => 'required|string|max:255|unique:kategori,nama_kategori',
         ]);
 
         Kategori::create([
@@ -46,7 +46,7 @@ class KategoriController extends Controller
 
         $kategori = Kategori::findOrFail($id);
 
-        return view('admin.kategori.edit', compact('title', 'slug', 'kategori'));
+        return view('admin.kategori.update', compact('title', 'slug', 'kategori'));
     }
 
     public function update(Request $request, int $id)
@@ -54,7 +54,7 @@ class KategoriController extends Controller
         $kategori = Kategori::findOrFail($id);
 
         $request->validate([
-            'nama_kategori' => 'required|string|max:255|unique:kategoris,nama_kategori,' . $id,
+            'nama_kategori' => 'required|string|max:255|unique:kategori,nama_kategori,' . $id,
         ]);
 
         $kategori->update([

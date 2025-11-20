@@ -6,6 +6,7 @@ use App\Models\Account;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class AuthCustomController extends Controller
@@ -34,16 +35,23 @@ class AuthCustomController extends Controller
 
         $role = ($baseUsername === 'admin') ? 'admin' : 'user';
 
-        // SIMPAN TANPA HASH (TIDAK AMAN, untuk dev only)
-        Account::create([
+        $payload = [
             'nama_lengkap' => $request->nama_lengkap,
             'username'     => $username,
             'email'        => $request->email,
             'password'     => $request->password,   // << plain text
             'role'         => $role,
-            'is_active'    => false,
-            'last_login_at' => null,
-        ]);
+        ];
+
+        if (Schema::hasColumn('accounts', 'is_active')) {
+            $payload['is_active'] = false;
+        }
+        if (Schema::hasColumn('accounts', 'last_login_at')) {
+            $payload['last_login_at'] = null;
+        }
+
+        // SIMPAN TANPA HASH (TIDAK AMAN, untuk dev only)
+        Account::create($payload);
 
         return back()->with('success', "Pendaftaran berhasil! Username Anda: $username.");
     }
@@ -70,21 +78,32 @@ class AuthCustomController extends Controller
         Auth::login($user);
         $request->session()->regenerate();
 
-        // update status
-        $user->is_active = true;
-        $user->last_login_at = now();
-        $user->save();
-
-        // redirect admin jika username mulai 'admin' atau role admin
-        $usernameLower = \Illuminate\Support\Str::lower($user->username);
-        $isAdminUsername = \Illuminate\Support\Str::startsWith($usernameLower, 'admin');
-        $isAdminRole = \Illuminate\Support\Str::lower($user->role) === 'admin';
-
-        if ($isAdminRole || $isAdminUsername) {
-            return redirect()->route('admin.dashboard');
+        // update status jika kolom tersedia
+        $dirty = false;
+        if (Schema::hasColumn('accounts', 'is_active')) {
+            $user->is_active = true;
+            $dirty = true;
+        }
+        if (Schema::hasColumn('accounts', 'last_login_at')) {
+            $user->last_login_at = now();
+            $dirty = true;
+        }
+        if ($dirty) {
+            $user->save();
         }
 
-        return redirect()->route('home');
+        // tentukan tujuan redirect
+        $usernameLower   = \Illuminate\Support\Str::lower($user->username);
+        $hasRoleColumn   = \Illuminate\Support\Facades\Schema::hasColumn('accounts', 'role');
+        $isAdminRole     = $hasRoleColumn && strcasecmp($user->role ?? '', 'admin') === 0;
+        $isAdminUsername = \Illuminate\Support\Str::startsWith($usernameLower, 'admin');
+
+        $target = ($isAdminRole || $isAdminUsername)
+            ? route('admin.dashboard')
+            : route('home');
+
+        // redirect ke intended (jika sebelumnya akses halaman terproteksi) atau fallback target
+        return redirect()->intended($target);
     }
 
 
@@ -95,7 +114,9 @@ class AuthCustomController extends Controller
         if ($user) {
             $account = Account::find($user->id);
             if ($account) {
-                $account->is_active = false;
+                if (Schema::hasColumn('accounts', 'is_active')) {
+                    $account->is_active = false;
+                }
                 $account->save();
             }
         }

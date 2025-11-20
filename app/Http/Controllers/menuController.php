@@ -18,7 +18,6 @@ class MenuController extends Controller
     public function showDetail($id)
     {
         $menu = Menu::findOrFail($id);
-        $menu->increment('dilihat');
         return view('pages.menu-detail', compact('menu'));
     }
 }

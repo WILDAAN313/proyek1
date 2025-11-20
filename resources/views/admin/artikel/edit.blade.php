@@ -10,11 +10,11 @@
         
         <div class="mb-3">
             <label class="form-label">Kategori</label>
-            <select name="id_kategori" class="form-control" required>
+            <select name="kategori" class="form-control">
                 <option value="">-- Pilih Kategori --</option>
                 @foreach ($kategori as $k)
-                    <option value="{{ $k->id_kategori }}"
-                        {{ $artikel->id_kategori == $k->id_kategori ? 'selected' : '' }}>
+                    <option value="{{ $k->nama_kategori }}"
+                        {{ $artikel->kategori === $k->nama_kategori ? 'selected' : '' }}>
                         {{ $k->nama_kategori }}
                     </option>
                 @endforeach
@@ -39,9 +39,16 @@
         <div class="mb-3">
             <label class="form-label">Gambar</label><br>
             @if ($artikel->gambar)
-                <img src="{{ asset('uploads/artikel/'.$artikel->gambar) }}" width="180" class="mb-2 rounded">
+                <img src="{{ Storage::url($artikel->gambar) }}" width="180" class="mb-2 rounded">
             @endif
             <input type="file" name="gambar" class="form-control">
+        </div>
+
+        <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" value="1" id="is_featured" name="is_featured" {{ $artikel->is_featured ? 'checked' : '' }}>
+            <label class="form-check-label" for="is_featured">
+                Tandai sebagai artikel unggulan
+            </label>
         </div>
 
         <button class="btn btn-success">Update</button>

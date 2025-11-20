@@ -30,9 +30,9 @@
                 <thead class="table-light">
                     <tr>
                         <th>No</th>
+                        <th>Foto</th>
                         <th>Menu</th>
-                        <th>Jadwal</th>
-                        <th>Dilihat</th>
+                        <th>Deskripsi</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -40,14 +40,15 @@
                     @forelse ($menus as $index => $item)
                         <tr>
                             <td>{{ $index + 1 }}</td>
-                            <td class="text-start">{{ $item->nama_menu }}</td>
                             <td>
-                                <span
-                                    class="badge {{ $item->jadwal === 'Sarapan' ? 'bg-warning text-dark' : 'bg-success' }}">
-                                    {{ $item->jadwal ?? '-' }}
-                                </span>
+                                <img src="{{ $item->gambar ? Storage::url($item->gambar) : 'https://via.placeholder.com/80x80' }}"
+                                     alt="Menu {{ $item->nama_menu }}"
+                                     class="rounded"
+                                     width="80"
+                                     height="80">
                             </td>
-                            <td>{{ $item->dilihat ?? 0 }}x</td>
+                            <td class="text-start">{{ $item->nama_menu }}</td>
+                            <td class="text-start">{{ Str::limit($item->deskripsi, 80) }}</td>
                             <td>
                                 <a href="{{ route('admin.menu.edit', $item->id) }}" class="btn btn-sm btn-primary">
                                     <i class="bi bi-pencil-square me-1"></i> Edit

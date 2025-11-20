@@ -12,12 +12,14 @@
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="card p-3 border-0 shadow-sm">
-                <h6 class="text-muted mb-1">Pengguna Aktif</h6>
-                <h3 class="text-success">{{ $activeUserCount ?? 0 }}</h3>
+        @if(\Illuminate\Support\Facades\Schema::hasColumn('accounts', 'is_active'))
+            <div class="col-md-3">
+                <div class="card p-3 border-0 shadow-sm">
+                    <h6 class="text-muted mb-1">Pengguna Aktif</h6>
+                    <h3 class="text-success">{{ $activeUserCount ?? 0 }}</h3>
+                </div>
             </div>
-        </div>
+        @endif
 
         <div class="col-md-3">
             <div class="card p-3 border-0 shadow-sm">
@@ -91,9 +93,13 @@
                                         <td>{{ $u->email }}</td>
                                         <td>
                                             <div class="d-flex flex-column align-items-center">
-                                                <span class="badge {{ $u->is_active ? 'bg-success' : 'bg-secondary' }}">
-                                                    {{ $u->is_active ? 'Sedang Online' : ($u->last_login_at ? 'Pernah Login' : 'Belum Login') }}
-                                                </span>
+                                                @if(isset($u->is_active))
+                                                    <span class="badge {{ $u->is_active ? 'bg-success' : 'bg-secondary' }}">
+                                                        {{ $u->is_active ? 'Sedang Online' : ($u->last_login_at ? 'Pernah Login' : 'Belum Login') }}
+                                                    </span>
+                                                @else
+                                                    <span class="badge bg-secondary">Status tidak tersedia</span>
+                                                @endif
                                                 @if($u->last_login_at)
                                                     <small class="text-muted mt-1">
                                                         {{ $u->last_login_at->format('d M Y H:i') }}

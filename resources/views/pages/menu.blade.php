@@ -3,23 +3,36 @@
 @section('content')
 
 <style>
-    .menu-banner {
-        height: 280px;
+    .menu-hero {
+        background: #e9f6ef;
+        padding: 60px 0 30px;
+    }
+
+    .menu-banner-wrap {
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+    }
+
+    .menu-banner-wrap img {
+        width: 100%;
+        height: 380px;
         object-fit: cover;
-        border-radius: 15px;
     }
 
     .menu-card {
-        border: none;
-        border-radius: 15px;
-        overflow: hidden;
+        border: 1px solid #e4ebe5;
+        border-radius: 16px;
         background: #ffffff;
-        transition: 0.3s;
+        overflow: hidden;
+        box-shadow: 0 12px 28px rgba(0,0,0,0.06);
+        transition: 0.2s ease;
+        height: 100%;
     }
 
     .menu-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0px 8px 20px rgba(0,0,0,0.1);
+        transform: translateY(-4px);
+        box-shadow: 0 16px 34px rgba(0,0,0,0.08);
     }
 
     .menu-img {
@@ -28,77 +41,89 @@
         width: 100%;
     }
 
-    .badge-fitlife {
-        background: #C8E6C9;
-        color: #1B5E20;
+    .tag-badge {
+        background: #e7f8ef;
+        color: #0da36b;
+        border-radius: 999px;
+        padding: 6px 12px;
         font-weight: 600;
-        padding: 6px 10px;
-        border-radius: 10px;
         font-size: 12px;
+    }
+
+    .tips-card {
+        background: #e9f6ef;
+        border-radius: 14px;
+        padding: 18px;
+        height: 100%;
     }
 </style>
 
-<div class="container my-5">
-
-    <h2 class="text-center fw-bold mb-2">Menu Sehat</h2>
-    <p class="text-center text-muted mb-4">
-        Resep makanan sehat, bergizi, dan cocok untuk mendukung pola hidup sehatmu 🌿
-    </p>
-
-   
-    <div class="row justify-content-center mb-4">
-        <div class="col-md-10">
-            <img src="https://via.placeholder.com/1000x300"
-                 class="img-fluid shadow menu-banner"
-                 alt="Menu Banner">
+<section class="menu-hero">
+    <div class="container text-center">
+        <div class="mb-4">
+            <div class="tag-badge mb-2 d-inline-block">Menu Sehat</div>
+            <h2 class="fw-bold">Menu Sehat</h2>
+            <p class="text-muted">Koleksi resep makanan sehat yang lezat dan bergizi untuk mendukung pola makan Anda</p>
+        </div>
+        <div class="menu-banner-wrap mb-4 mx-auto" style="max-width: 960px;">
+            <img src="{{ optional($menus->first())->gambar ? Storage::url($menus->first()->gambar) : asset('images/salad.jpg') }}" alt="Banner Menu Sehat">
         </div>
     </div>
+</section>
 
-    <div class="row">
-        @forelse ($menus as $item)
-            <div class="col-md-4 mb-4">
-                <div class="card menu-card shadow-sm h-100">
-
-                    <img src="{{ $item->gambar ? asset('storage/' . $item->gambar) : 'https://via.placeholder.com/400x200' }}"
-                         class="menu-img"
-                         alt="Menu Image">
-
-                    <div class="card-body">
-
-                        <h5 class="fw-bold">{{ $item->nama_menu }}</h5>
-
-                        @if($item->kategori)
-                        <span class="badge-fitlife">{{ $item->kategori }}</span>
-                        @endif
-
-                        <p class="text-muted small mt-2" style="font-size: 14px;">
-                            {{ Str::limit($item->deskripsi, 100) }}
-                        </p>
-
-                                      <div class="d-flex justify-content-between text-muted mb-2">
-                            <span>🔥 {{ $item->kalori ?? 0 }} kal</span>
-                            <span>⏱️ {{ $item->waktu ?? 0 }} menit</span>
-                        </div>
-
-                        @if ($item->bahan)
-                            <p class="small text-dark mb-1"><strong>Bahan-bahan:</strong></p>
-                            <div class="d-flex flex-wrap gap-1">
-                                @foreach (explode(',', $item->bahan) as $b)
-                                    <span class="badge bg-light text-dark border">
-                                        {{ trim($b) }}
-                                    </span>
-                                @endforeach
+<section class="py-5" style="background:#f7fbf8;">
+    <div class="container">
+        <div class="row g-4">
+            @forelse ($menus as $item)
+                <div class="col-lg-4 col-md-6">
+                    <div class="menu-card">
+                        <img src="{{ $item->gambar ? Storage::url($item->gambar) : asset('images/gambar_menu.jpg') }}"
+                             class="menu-img"
+                             alt="Menu {{ $item->nama_menu }}">
+                        <div class="p-3">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="fw-bold mb-0">{{ $item->nama_menu }}</h5>
+                                <span class="badge bg-success-subtle text-success">Sehat</span>
                             </div>
-                        @endif
-
+                            <p class="text-muted small mb-0">{{ Str::limit($item->deskripsi, 120) }}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        @empty
-            <p class="text-center text-muted">Belum ada menu yang tersedia.</p>
-        @endforelse
+            @empty
+                <div class="col-12">
+                    <p class="text-center text-muted">Belum ada menu yang tersedia.</p>
+                </div>
+            @endforelse
+        </div>
     </div>
+</section>
 
-</div>
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-4">
+            <h4 class="fw-bold">Tips Menyiapkan Menu Sehat</h4>
+        </div>
+        <div class="row g-3">
+            <div class="col-md-4">
+                <div class="tips-card h-100">
+                    <h5 class="fw-bold mb-2">1. Persiapan Awal</h5>
+                    <p class="text-muted mb-0 small">Siapkan bahan-bahan segar dan cuci bersih sebelum dimasak.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="tips-card h-100">
+                    <h5 class="fw-bold mb-2">2. Porsi Seimbang</h5>
+                    <p class="text-muted mb-0 small">Perhatikan keseimbangan protein, karbohidrat, dan sayuran.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="tips-card h-100">
+                    <h5 class="fw-bold mb-2">3. Variasi Menu</h5>
+                    <p class="text-muted mb-0 small">Ganti menu secara berkala untuk mendapatkan nutrisi yang beragam.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 @endsection

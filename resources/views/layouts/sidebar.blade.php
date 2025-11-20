@@ -83,10 +83,6 @@
             <i class="bi bi-egg-fried"></i> Menu Sehat
         </a>
 
-        <a href="{{ route('admin.kategori.index') }}" class="{{ request()->is('admin/kategori*') ? 'active' : '' }}">
-            <i class="bi bi-tags"></i> Kategori Artikel
-        </a>
-
         <a href="{{ route('admin.artikel.index') }}" class="{{ request()->is('admin/artikel*') ? 'active' : '' }}">
             <i class="bi bi-newspaper"></i> Artikel
         </a>

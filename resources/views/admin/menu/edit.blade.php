@@ -3,7 +3,7 @@
 @section('content')
 <h3 class="fw-bold mb-3">Edit Menu</h3>
 
-<form action="{{ route('admin.menu.update', $menu->id) }}" method="POST">
+<form action="{{ route('admin.menu.update', $menu->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
 
@@ -18,12 +18,11 @@
     </div>
 
     <div class="mb-3">
-        <label>Jadwal</label>
-        <select name="jadwal" class="form-select">
-            <option value="Sarapan" {{ $menu->jadwal == 'Sarapan' ? 'selected' : '' }}>Sarapan</option>
-            <option value="Makan Siang" {{ $menu->jadwal == 'Makan Siang' ? 'selected' : '' }}>Makan Siang</option>
-            <option value="Makan Malam" {{ $menu->jadwal == 'Makan Malam' ? 'selected' : '' }}>Makan Malam</option>
-        </select>
+        <label>Foto Menu</label><br>
+        @if($menu->gambar)
+            <img src="{{ Storage::url($menu->gambar) }}" alt="Foto {{ $menu->nama_menu }}" class="rounded mb-2" width="160">
+        @endif
+        <input type="file" name="gambar" class="form-control">
     </div>
 
     <button type="submit" class="btn btn-primary">Perbarui</button>

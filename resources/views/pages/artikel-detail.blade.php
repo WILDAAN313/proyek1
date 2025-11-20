@@ -3,33 +3,28 @@
 @section('content')
 
 <style>
+    .artikel-hero {
+        background: #e9f6ef;
+        padding: 48px 0 30px;
+    }
+    .detail-card {
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 18px 44px rgba(0,0,0,0.08);
+        overflow: hidden;
+    }
     .detail-img {
         width: 100%;
-        height: 380px;
+        height: 360px;
         object-fit: cover;
-        border-radius: 12px;
     }
-    .detail-title {
-        font-size: 32px;
-        font-weight: 800;
-        margin-top: 20px;
-    }
-    .detail-info {
-        color: #666;
-        margin-bottom: 20px;
-    }
-    .detail-content {
-        font-size: 17px;
-        line-height: 1.7rem;
-        color: #333;
-    }
-
     .artikel-card {
         border-radius: 12px;
         overflow: hidden;
         background: #fff;
-        box-shadow: 0px 3px 10px rgba(0,0,0,0.1);
+        box-shadow: 0px 12px 28px rgba(0,0,0,0.07);
         transition: 0.2s;
+        height: 100%;
     }
     .artikel-card:hover {
         transform: translateY(-4px);
@@ -41,52 +36,57 @@
     }
 </style>
 
+<section class="artikel-hero">
+    <div class="container text-center">
+        <div class="badge bg-success-subtle text-success fw-semibold mb-2">{{ $artikel->kategori ?? 'Artikel' }}</div>
+        <h2 class="fw-bold mb-2">{{ $artikel->judul }}</h2>
+        <div class="text-muted small">
+            <i class="bi bi-calendar me-1"></i>{{ $artikel->created_at?->format('d M Y') }} &nbsp; | &nbsp;
+            <i class="bi bi-eye me-1"></i>{{ $artikel->dibaca }} kali dibaca
+        </div>
+    </div>
+</section>
 
 <div class="container py-4">
-
-    <img src="{{ asset('storage/' . $artikel->gambar) }}" class="detail-img" alt="">
-
-    <h1 class="detail-title">
-        {{ $artikel->judul }}
-    </h1>
-
-    <div class="detail-info">
-        <span>📅 {{ $artikel->created_at->format('d M Y') }}</span> &nbsp; | &nbsp;
-        <span>👁 {{ $artikel->dibaca }} kali dibaca</span>
-    </div>
-
-    <div class="detail-content mb-5">
-        {!! nl2br($artikel->isi) !!}
-    </div>
-    @if(isset($artikels) && $artikels->count() > 1)
-    <h3 class="fw-bold mb-3">Artikel Lainnya</h3>
-
-    <div class="row g-4">
-        @foreach($artikels as $a)
-            @if($a->id != $artikel->id)
-            <div class="col-md-4">
-                <div class="artikel-card">
-                    <img src="{{ asset('storage/' . $a->gambar) }}" alt="">
-
-                    <div class="p-3">
-                        <div class="fw-bold" style="font-size: 18px;">
-                            {{ $a->judul }}
-                        </div>
-
-                        <div class="text-muted mb-2">
-                            {{ Str::limit(strip_tags($a->isi), 80) }}
-                        </div>
-
-                        <a href="{{ route('artikel.show', $a->slug) }}"
-                           class="btn btn-outline-primary w-100">
-                            Baca Selengkapnya
-                        </a>
-                    </div>
-                </div>
+    <div class="detail-card mb-5">
+        <img src="{{ $artikel->gambar ? Storage::url($artikel->gambar) : asset('images/sayuran.jpg') }}" class="detail-img" alt="{{ $artikel->judul }}">
+        <div class="p-4">
+            <div class="mb-3 text-muted small">Ditulis oleh {{ $artikel->penulis ?? 'Admin' }}</div>
+            <div class="fs-6" style="line-height: 1.7rem;">
+                {!! nl2br(e($artikel->isi)) !!}
             </div>
-            @endif
-        @endforeach
+        </div>
     </div>
+
+    @if(isset($artikels) && $artikels->count() > 1)
+        <h3 class="fw-bold mb-3">Artikel Lainnya</h3>
+
+        <div class="row g-4">
+            @foreach($artikels as $a)
+                @if($a->id != $artikel->id)
+                    <div class="col-md-4">
+                        <div class="artikel-card">
+                            <img src="{{ $a->gambar ? Storage::url($a->gambar) : asset('images/gambar_menu.jpg') }}" alt="{{ $a->judul }}">
+
+                            <div class="p-3">
+                                <div class="fw-bold" style="font-size: 18px;">
+                                    {{ $a->judul }}
+                                </div>
+
+                                <div class="text-muted mb-2">
+                                    {{ Str::limit(strip_tags($a->isi), 80) }}
+                                </div>
+
+                                <a href="{{ route('artikel.show', $a->slug) }}"
+                                   class="btn btn-outline-success w-100">
+                                    Baca Selengkapnya
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+            @endforeach
+        </div>
     @endif
 
 </div>

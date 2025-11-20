@@ -9,12 +9,13 @@
 
         <div class="mb-3">
             <label class="form-label">Kategori</label>
-            <select name="id_kategori" class="form-control" required>
+            <select name="kategori" class="form-control">
                 <option value="">-- Pilih Kategori --</option>
                 @foreach ($kategori as $k)
-                    <option value="{{ $k->id_kategori }}">{{ $k->nama_kategori }}</option>
+                    <option value="{{ $k->nama_kategori }}">{{ $k->nama_kategori }}</option>
                 @endforeach
             </select>
+            <small class="text-muted">Kategori disimpan sebagai teks sesuai kolom pada tabel artikels.</small>
         </div>
         <div class="mb-3">
             <label class="form-label">Judul</label>
@@ -34,6 +35,13 @@
         <div class="mb-3">
             <label class="form-label">Gambar</label>
             <input type="file" name="gambar" class="form-control">
+        </div>
+
+        <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" value="1" id="is_featured" name="is_featured" {{ old('is_featured') ? 'checked' : '' }}>
+            <label class="form-check-label" for="is_featured">
+                Tandai sebagai artikel unggulan
+            </label>
         </div>
 
         <button class="btn btn-success">Simpan</button>

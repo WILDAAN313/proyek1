@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Artikel;
+use App\Models\Menu;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -10,7 +12,19 @@ class HomeController extends Controller
         $title = "Home";
         $slug = "home";
         $konten = "Selamat Datang di FitLife!";
-        return view('pages.home', compact('title','slug','konten'));
+
+        $featuredMenus = Menu::latest()->take(3)->get();
+        $latestArticles = Artikel::latest()->take(3)->get();
+        $heroHighlight = $latestArticles->first();
+
+        return view('pages.home', compact(
+            'title',
+            'slug',
+            'konten',
+            'featuredMenus',
+            'latestArticles',
+            'heroHighlight'
+        ));
     }
 
     public function kalkulator(Request $request) {

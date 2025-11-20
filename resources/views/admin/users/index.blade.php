@@ -41,9 +41,13 @@
                         <td>{{ $user->email }}</td>
                         <td><span class="badge bg-info text-dark">{{ $user->role ?? 'User' }}</span></td>
                         <td>
-                            <span class="badge {{ $user->is_active ? 'bg-success' : 'bg-secondary' }}">
-                                {{ $user->is_active ? 'Sedang Online' : ($user->last_login_at ? 'Pernah Login' : 'Belum Login') }}
-                            </span>
+                            @if(isset($user->is_active))
+                                <span class="badge {{ $user->is_active ? 'bg-success' : 'bg-secondary' }}">
+                                    {{ $user->is_active ? 'Sedang Online' : ($user->last_login_at ? 'Pernah Login' : 'Belum Login') }}
+                                </span>
+                            @else
+                                <span class="badge bg-secondary">Status tidak tersedia</span>
+                            @endif
                         </td>
                         <td>
                             <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-sm btn-primary">
