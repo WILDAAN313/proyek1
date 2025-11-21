@@ -56,6 +56,32 @@
         padding: 18px;
         height: 100%;
     }
+
+    .menu-meta {
+        border-top: 1px solid #eef3ef;
+        background: #f9fdfb;
+        padding: 12px 16px;
+    }
+
+    .meta-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: #6c7d86;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .meta-icon {
+        width: 30px;
+        height: 30px;
+        border-radius: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #e7f8ef;
+        color: #0da36b;
+    }
 </style>
 
 <section class="menu-hero">
@@ -86,6 +112,16 @@
                                 <span class="badge bg-success-subtle text-success">Sehat</span>
                             </div>
                             <p class="text-muted small mb-0">{{ Str::limit($item->deskripsi, 120) }}</p>
+                        </div>
+                        <div class="menu-meta d-flex justify-content-between align-items-center">
+                            <div class="meta-item">
+                                <span class="meta-icon"><i class="bi bi-fire"></i></span>
+                                <span>{{ !is_null($item->kalori ?? null) ? $item->kalori . ' kkal' : 'Kalori belum ada' }}</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon"><i class="bi bi-clock-history"></i></span>
+                                <span>{{ !is_null($item->waktu_memasak ?? null) ? $item->waktu_memasak . ' menit' : 'Waktu belum ada' }}</span>
+                            </div>
                         </div>
                     </div>
                 </div>

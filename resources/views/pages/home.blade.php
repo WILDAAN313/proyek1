@@ -201,23 +201,25 @@
                         <h5 class="fw-bold mb-0">Artikel Terbaru</h5>
                         <a href="{{ route('artikel.index') }}" class="text-success">Lihat semua</a>
                     </div>
-                    @forelse($latestArticles as $artikel)
-                        <div class="mini-card mb-3">
-                            <div class="d-flex">
-                                <div class="me-3">
-                                    <img src="{{ $artikel->gambar ? Storage::url($artikel->gambar) : 'https://via.placeholder.com/80x80' }}" class="rounded" width="80" height="80" alt="{{ $artikel->judul }}">
-                                </div>
-                                <div>
+                    <div class="row g-3">
+                        @forelse($latestArticles as $artikel)
+                            <div class="col-sm-6">
+                                <div class="mini-card h-100">
+                                    <div class="ratio ratio-4x3 mb-2">
+                                        <img src="{{ $artikel->gambar ? Storage::url($artikel->gambar) : 'https://via.placeholder.com/200x150' }}" class="rounded w-100 h-100 object-fit-cover" alt="{{ $artikel->judul }}">
+                                    </div>
                                     <div class="small text-success fw-semibold mb-1">{{ $artikel->kategori ?? 'Artikel' }}</div>
                                     <h6 class="fw-bold mb-1">{{ $artikel->judul }}</h6>
-                                    <p class="small text-muted mb-2">{{ Str::limit(strip_tags($artikel->isi), 80) }}</p>
+                                    <p class="small text-muted mb-2">{{ Str::limit(strip_tags($artikel->isi), 90) }}</p>
                                     <a href="{{ route('artikel.show', $artikel->slug) }}" class="text-success small fw-semibold">Baca selengkapnya</a>
                                 </div>
                             </div>
-                        </div>
-                    @empty
-                        <p class="text-muted mb-0">Belum ada artikel.</p>
-                    @endforelse
+                        @empty
+                            <div class="col-12">
+                                <p class="text-muted mb-0">Belum ada artikel.</p>
+                            </div>
+                        @endforelse
+                    </div>
                 </div>
             </div>
         </div>
