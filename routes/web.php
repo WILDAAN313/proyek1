@@ -26,6 +26,7 @@ Route::match(['GET','POST'], '/logout', [AuthCustomController::class, 'logout'])
     ->name('logout');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/profile', function () {return view('profile');})->middleware('auth')->name('profile');
 Route::get('/menu', [MenuController::class, 'showUser'])->name('menu');
 Route::get('/menu/{id}', [MenuController::class, 'showDetail'])->name('menu.show');
 Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel.index');

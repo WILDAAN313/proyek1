@@ -26,9 +26,15 @@
                     <a class="nav-link px-3 {{ request()->is('artikel*') ? 'fw-semibold text-success' : '' }}" href="{{ route('artikel.index') }}">Artikel</a>
                 </li>
                 <li class="nav-item ms-lg-2">
-                    <a class="btn btn-outline-success rounded-circle d-inline-flex align-items-center justify-content-center" href="{{ route('auth.index') }}" style="width:42px;height:42px;">
+                     @if(Auth::check())
+                        <a class="btn btn-outline-success rounded-circle d-inline-flex align-items-center justify-content-center" href="{{ route('profile') }}" style="width:42px;height:42px;">
                         <i class="bi bi-person"></i>
-                    </a>
+                 </a>
+                     @else
+                        <a class="btn btn-outline-success rounded-circle d-inline-flex align-items-center justify-content-center" href="{{ route('auth.index') }}" style="width:42px;height:42px;">
+                        <i class="bi bi-person"></i>
+                 </a>
+                     @endif
                 </li>
             </ul>
         </div>
