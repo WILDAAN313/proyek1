@@ -43,3 +43,4 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('kategori', AdminKategoriController::class);
     Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
 });
+
