@@ -11,14 +11,14 @@ class Artikel extends Model
 
     protected $table = 'artikels';
 
-    protected $fillable = [
-        'judul',
-        'slug',
-        'kategori',
-        'isi',
-        'penulis',
-        'gambar',
-        'is_featured',
-        'dibaca',
+   protected $fillable = [
+    'kategori',
+    'judul',
+    'slug',
+    'isi',
+    'gambar',
+    'penulis',
+    'is_featured',
+    'dibaca',
     ];
 }

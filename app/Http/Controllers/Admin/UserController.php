@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -23,5 +25,83 @@ class UserController extends Controller
             ->withQueryString();
 
         return view('admin.users.index', compact('users'));
+    }
+
+    public function create()
+    {
+        return view('admin.users.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nama_lengkap' => 'required',
+            'username'     => 'required|unique:accounts',
+            'email'        => 'required|email|unique:accounts',
+            'password'     => 'required|min:6',
+            'role'         => 'required',
+            'photo'        => 'nullable|image|max:2048',
+        ]);
+
+        $data = $request->except('photo', 'password');
+        if ($request->hasFile('photo')) {
+            $data['photo'] = $request->file('photo')->store('profile', 'public');
+        }
+        $data['password'] = Hash::make($request->password);
+
+        Account::create($data);
+
+        return redirect()->route('admin.users.index')->with('success', 'Pengguna berhasil ditambahkan.');
+    }
+
+    public function edit($id)
+    {
+        $user = Account::findOrFail($id);
+
+        return view('admin.users.edit', compact('user'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $user = Account::findOrFail($id);
+
+        $request->validate([
+            'nama_lengkap' => 'required',
+            'username'     => "required|unique:accounts,username,$id",
+            'email'        => "required|email|unique:accounts,email,$id",
+            'role'         => 'required',
+            'photo'        => 'nullable|image|max:2048',
+        ]);
+
+        $data = $request->except('photo');
+
+        if ($request->password) {
+            $data['password'] = Hash::make($request->password);
+        }
+
+        if ($request->hasFile('photo')) {
+            if ($user->photo) {
+                Storage::disk('public')->delete($user->photo);
+            }
+
+            $data['photo'] = $request->file('photo')->store('profile', 'public');
+        }
+
+        $user->update($data);
+
+        return redirect()->route('admin.users.index')->with('success', 'Pengguna berhasil diperbarui.');
+    }
+
+    public function destroy($id)
+    {
+        $user = Account::findOrFail($id);
+
+        if ($user->photo) {
+            Storage::disk('public')->delete($user->photo);
+        }
+
+        $user->delete();
+
+        return redirect()->route('admin.users.index')->with('success', 'Pengguna berhasil dihapus.');
     }
 }

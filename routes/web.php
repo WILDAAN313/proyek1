@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AuthCustomController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\MenuController as AdminMenuController;
@@ -26,7 +27,12 @@ Route::match(['GET','POST'], '/logout', [AuthCustomController::class, 'logout'])
     ->name('logout');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/profile', function () {return view('profile');})->middleware('auth')->name('profile');
+Route::prefix('test')->group(function () {
+Route::put('/profile/update', [ProfileController::class, 'update'])->name('test.profile.update');
+Route::get('/profile', function () {
+        return view('pages.profile');
+    })->name('test.profile');
+});
 Route::get('/menu', [MenuController::class, 'showUser'])->name('menu');
 Route::get('/menu/{id}', [MenuController::class, 'showDetail'])->name('menu.show');
 Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel.index');

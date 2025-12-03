@@ -27,7 +27,7 @@
                 </li>
                 <li class="nav-item ms-lg-2">
                      @if(Auth::check())
-                        <a class="btn btn-outline-success rounded-circle d-inline-flex align-items-center justify-content-center" href="{{ route('profile') }}" style="width:42px;height:42px;">
+                        <a class="btn btn-outline-success rounded-circle d-inline-flex align-items-center justify-content-center" href="{{ route('test.profile') }}" style="width:42px;height:42px;">
                         <i class="bi bi-person"></i>
                  </a>
                      @else

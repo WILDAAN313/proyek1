@@ -46,4 +46,9 @@ class HomeController extends Controller
 
         return view('pages.kalkulator', compact('title','slug','konten'));
     }
+
+    public function HalamanProfile()
+    {
+        return view('profile');
+    }
 }

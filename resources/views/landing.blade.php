@@ -23,7 +23,7 @@
                     Selamat datang, {{ Auth::user()->nama_lengkap ?? Auth::user()->username }}
                 </span>
 
-                <a href="/profile"
+                <a href={{ route('test.profile') }}
                     class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
                     Profil
                 </a>

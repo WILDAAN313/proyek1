@@ -12,21 +12,26 @@ class Account extends Authenticatable
     protected $table = 'accounts';
 
     protected $fillable = [
-        'nama_lengkap',
-        'username',
-        'email',
-        'password',
-        'role',
-        'is_active',
-        'last_login_at'
-    ];
-
+    'nama_lengkap',
+    'username',
+    'email',
+    'password',
+    'role',
+    'is_active',
+    'last_login_at',
+    'phone',
+    'birthdate',
+    'weight',
+    'height',
+    'photo',
+];
 
     public $timestamps = true;
 
     protected $casts = [
         'is_active'     => 'boolean',
         'last_login_at' => 'datetime',
+        'birthdate'     => 'date'
     ];
 
     public function getNameAttribute()
