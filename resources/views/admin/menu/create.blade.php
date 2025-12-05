@@ -16,6 +16,16 @@
     </div>
 
     <div class="mb-3">
+        <label>Kalori (kkal)</label>
+        <input type="number" name="kalori" class="form-control" min="0" placeholder="Contoh: 250">
+    </div>
+
+    <div class="mb-3">
+        <label>Waktu Memasak (menit)</label>
+        <input type="number" name="waktu_memasak" class="form-control" min="0" placeholder="Contoh: 30">
+    </div>
+
+    <div class="mb-3">
         <label>Foto Menu</label>
         <input type="file" name="gambar" class="form-control">
     </div>

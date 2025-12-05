@@ -182,6 +182,16 @@
                                         <div>
                                             <h6 class="fw-bold mb-1">{{ $menu->nama_menu }}</h6>
                                             <p class="small text-muted mb-2">{{ Str::limit($menu->deskripsi, 80) }}</p>
+                                            <div class="d-flex flex-wrap gap-3 text-muted small mb-2">
+                                                <span class="d-flex align-items-center gap-1">
+                                                    <i class="bi bi-fire text-danger"></i>
+                                                    {{ !is_null($menu->kalori ?? null) ? $menu->kalori . ' kkal' : 'Kalori belum ada' }}
+                                                </span>
+                                                <span class="d-flex align-items-center gap-1">
+                                                    <i class="bi bi-clock-history text-success"></i>
+                                                    {{ !is_null($menu->waktu_memasak ?? null) ? $menu->waktu_memasak . ' menit' : 'Waktu belum ada' }}
+                                                </span>
+                                            </div>
                                             <a href="{{ route('menu.show', $menu->id) }}" class="text-success fw-semibold small">Lihat menu</a>
                                         </div>
                                     </div>

@@ -9,14 +9,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('artikels', function (Blueprint $table) {
-            $table->unsignedInteger('dibaca')->default(0)->after('is_featured');
+            if (!Schema::hasColumn('artikels', 'dibaca')) {
+                $table->unsignedInteger('dibaca')->default(0)->after('is_featured');
+            }
         });
     }
 
     public function down(): void
     {
         Schema::table('artikels', function (Blueprint $table) {
-            $table->dropColumn('dibaca');
+            if (Schema::hasColumn('artikels', 'dibaca')) {
+                $table->dropColumn('dibaca');
+            }
         });
     }
 };

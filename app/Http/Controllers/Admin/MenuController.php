@@ -25,6 +25,8 @@ class MenuController extends Controller
         $data = $request->validate([
             'nama_menu' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
+            'kalori' => 'nullable|integer|min:0',
+            'waktu_memasak' => 'nullable|integer|min:0',
             'gambar' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:3048',
         ]);
 
@@ -51,6 +53,8 @@ class MenuController extends Controller
         $data = $request->validate([
             'nama_menu' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
+            'kalori' => 'nullable|integer|min:0',
+            'waktu_memasak' => 'nullable|integer|min:0',
             'gambar' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:3048',
         ]);
 

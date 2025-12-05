@@ -32,6 +32,8 @@
                         <th>No</th>
                         <th>Foto</th>
                         <th>Menu</th>
+                        <th>Kalori</th>
+                        <th>Waktu Memasak</th>
                         <th>Deskripsi</th>
                         <th>Aksi</th>
                     </tr>
@@ -48,6 +50,8 @@
                                      height="80">
                             </td>
                             <td class="text-start">{{ $item->nama_menu }}</td>
+                            <td>{{ !is_null($item->kalori ?? null) ? $item->kalori . ' kkal' : '-' }}</td>
+                            <td>{{ !is_null($item->waktu_memasak ?? null) ? $item->waktu_memasak . ' menit' : '-' }}</td>
                             <td class="text-start">{{ Str::limit($item->deskripsi, 80) }}</td>
                             <td>
                                 <a href="{{ route('admin.menu.edit', $item->id) }}" class="btn btn-sm btn-primary">

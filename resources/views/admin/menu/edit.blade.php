@@ -18,6 +18,16 @@
     </div>
 
     <div class="mb-3">
+        <label>Kalori (kkal)</label>
+        <input type="number" name="kalori" value="{{ $menu->kalori }}" class="form-control" min="0" placeholder="Contoh: 250">
+    </div>
+
+    <div class="mb-3">
+        <label>Waktu Memasak (menit)</label>
+        <input type="number" name="waktu_memasak" value="{{ $menu->waktu_memasak }}" class="form-control" min="0" placeholder="Contoh: 30">
+    </div>
+
+    <div class="mb-3">
         <label>Foto Menu</label><br>
         @if($menu->gambar)
             <img src="{{ Storage::url($menu->gambar) }}" alt="Foto {{ $menu->nama_menu }}" class="rounded mb-2" width="160">

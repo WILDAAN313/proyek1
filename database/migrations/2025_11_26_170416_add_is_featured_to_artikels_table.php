@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-    Schema::table('artikels', function (Blueprint $table) {
-        $table->boolean('is_featured')->default(false);
-    });
-}
+        Schema::table('artikels', function (Blueprint $table) {
+            if (!Schema::hasColumn('artikels', 'is_featured')) {
+                $table->boolean('is_featured')->default(false);
+            }
+        });
+    }
 
     /**
      * Reverse the migrations.
@@ -22,7 +24,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('artikels', function (Blueprint $table) {
-        $table->dropColumn('is_featured');
-    });
+            if (Schema::hasColumn('artikels', 'is_featured')) {
+                $table->dropColumn('is_featured');
+            }
+        });
     }
 };
