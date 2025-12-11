@@ -44,6 +44,7 @@ Route::get('/artikel/{slug}', [ArtikelController::class, 'show'])->name('artikel
 Route::match(['get', 'post'], '/kalkulator', [HomeController::class, 'kalkulator'])->name('kalkulator');
 
 
+
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('dashboard');
 

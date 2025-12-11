@@ -43,7 +43,7 @@
 
     <section class="artikel-hero">
         <div class="container text-center">
-            <div class="fitlife-icon mx-auto mb-2"><i class="bi bi-journal-text"></i></div>
+            {{-- <div class="fitlife-icon mx-auto mb-2"><i class="bi bi-journal-text"></i></div> --}}
             <h2 class="fw-bold mb-2">{{ $artikel->judul }}</h2>
             <div class="text-muted small">
                 <i class="bi bi-calendar me-1"></i>{{ $artikel->created_at?->format('d M Y') }} &nbsp; | &nbsp;

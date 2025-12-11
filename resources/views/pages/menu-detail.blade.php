@@ -42,8 +42,12 @@
 
     <section class="menu-hero">
         <div class="container text-center">
-            <div class="fitlife-icon mx-auto mb-2"><i class="bi bi-egg-fried"></i></div>
+            {{-- <div class="fitlife-icon mx-auto mb-2"><i class="bi bi-egg-fried"></i></div> --}}
             <h2 class="fw-bold mb-0">{{ $menu->nama_menu }}</h2>
+            <div class="text-muted small">
+                <i class="bi bi-calendar me-1"></i>{{ $menu->created_at?->format('d M Y') }} &nbsp; | &nbsp;
+                <i class="bi bi-eye me-1"></i>{{ $menu->dibaca }} kali dibaca
+            </div>
         </div>
     </section>
 
@@ -61,7 +65,7 @@
 
             <div class="p-4">
                 <h3 class="fw-bold mb-2">{{ $menu->nama_menu }}</h3>
-                <p class="text-muted mb-3">{{ $menu->created_at?->format('d M Y') }}</p>
+
 
                 <div class="d-flex gap-4 align-items-center mb-3 text-muted">
                     <div class="d-flex align-items-center gap-2 fw-semibold">
