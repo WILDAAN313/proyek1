@@ -35,7 +35,7 @@
         <input type="file" name="gambar" class="form-control">
     </div>
 
-    <button type="submit" class="btn btn-primary">Perbarui</button>
+    <button type="submit" class="btn btn-primary">Update</button>
     <a href="{{ route('admin.menu.index') }}" class="btn btn-secondary">Kembali</a>
 </form>
 @endsection

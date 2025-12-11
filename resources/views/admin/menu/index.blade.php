@@ -44,10 +44,10 @@
                             <td>{{ $index + 1 }}</td>
                             <td>
                                 <img src="{{ $item->gambar ? Storage::url($item->gambar) : 'https://via.placeholder.com/80x80' }}"
-                                     alt="Menu {{ $item->nama_menu }}"
-                                     class="rounded"
-                                     width="80"
-                                     height="80">
+                                    alt="Menu {{ $item->nama_menu }}"
+                                    class="rounded"
+                                    width="80"
+                                    height="80">
                             </td>
                             <td class="text-start">{{ $item->nama_menu }}</td>
                             <td>{{ !is_null($item->kalori ?? null) ? $item->kalori . ' kkal' : '-' }}</td>

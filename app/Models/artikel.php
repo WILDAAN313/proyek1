@@ -11,14 +11,19 @@ class Artikel extends Model
 
     protected $table = 'artikels';
 
-   protected $fillable = [
-    'kategori',
-    'judul',
-    'slug',
-    'isi',
-    'gambar',
-    'penulis',
-    'is_featured',
-    'dibaca',
+    protected $fillable = [
+        'kategori',
+        'judul',
+        'slug',
+        'isi',
+        'gambar',
+        'penulis',
+        'is_featured',
+        'dibaca',
     ];
+
+    public function kategori()
+    {
+        return $this->belongsTo(\App\Models\Kategori::class, 'kategori_id', 'id_kategori');
+    }
 }

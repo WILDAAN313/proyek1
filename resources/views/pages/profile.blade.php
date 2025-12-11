@@ -43,11 +43,21 @@
             @csrf
             @method('PUT')
 
-            <label for="photoInput">
-                <img src="{{ Auth::user()->photo ? asset('storage/profile/' . Auth::user()->photo) : asset('default-user.png') }}"
-                    id="profilePreview" class="profile-photo mt-4">
+            @php
+                $user = Auth::user();
+                if (!empty($user->google_avatar)) {
+                    $imgUrl = Storage::url($user->google_avatar);
+                } elseif (!empty($user->photo)) {
+                    $imgUrl = Storage::url($user->photo);
+                } else {
+                    $imgUrl = asset('default-user.png');
+                }
+            @endphp
 
+            <label for="photoInput">
+                <img src="{{ $imgUrl }}" id="profilePreview" class="profile-photo mt-4">
             </label>
+
 
             <input type="file" id="photoInput" name="photo" class="d-none" accept="image/*">
 
@@ -107,6 +117,16 @@
             <button type="submit" id="saveBtn" class="btn btn-primary px-4 d-none">Simpan Perubahan</button>
         </div>
 
+        </form>
+    </div>
+
+    <!-- Tombol Logout -->
+    <div class="container text-center mt-4 mb-5">
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-danger px-4">
+                Logout
+            </button>
         </form>
     </div>
 

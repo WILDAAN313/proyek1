@@ -45,6 +45,21 @@
                         Login
                     </button>
                 </form>
+
+                <!-- Divider -->
+                <div class="my-4 flex items-center">
+                    <div class="flex-grow h-px bg-gray-300"></div>
+                    <span class="text-gray-400 text-sm px-2">atau</span>
+                    <div class="flex-grow h-px bg-gray-300"></div>
+                </div>
+
+                <!-- Google Login Button -->
+                <a href="{{ route('auth.google.redirect') }}"
+                    class="w-full flex items-center justify-center gap-3 border border-gray-300 py-2 rounded-lg hover:bg-gray-100 transition">
+                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="w-5 h-5"
+                        alt="Google Logo">
+                    <span class="text-gray-700 font-medium">Masuk dengan Google</span>
+                </a>
             </div>
         </template>
 
@@ -70,6 +85,21 @@
                         Daftar
                     </button>
                 </form>
+
+                <!-- Divider -->
+                <div class="my-4 flex items-center">
+                    <div class="flex-grow h-px bg-gray-300"></div>
+                    <span class="text-gray-400 text-sm px-2">atau</span>
+                    <div class="flex-grow h-px bg-gray-300"></div>
+                </div>
+
+                <!-- Google Login Button -->
+                <a href="{{ route('auth.google.redirect') }}"
+                    class="w-full flex items-center justify-center gap-3 border border-gray-300 py-2 rounded-lg hover:bg-gray-100 transition">
+                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="w-5 h-5"
+                        alt="Google Logo">
+                    <span class="text-gray-700 font-medium">Register dengan Google</span>
+                </a>
             </div>
         </template>
 

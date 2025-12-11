@@ -30,12 +30,12 @@
                     <td>{{ $k->nama_kategori }}</td>
                     <td>
                         <a href="{{ route('admin.kategori.edit', $k->id_kategori) }}"
-                           class="btn btn-warning btn-sm">
+                        class="btn btn-warning btn-sm">
                             Edit
                         </a>
                         <form action="{{ route('admin.kategori.destroy', $k->id_kategori) }}"
-                              method="POST"
-                              style="display:inline-block;">
+                            method="POST"
+                            style="display:inline-block;">
                             @csrf
                             @method('DELETE')
                             <button type="submit"

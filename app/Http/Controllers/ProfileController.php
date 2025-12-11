@@ -18,17 +18,20 @@ class ProfileController extends Controller
             ]);
 
             $file = $request->file('photo');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
 
-            // Simpan ke disk 'public' di folder 'profile'
-            $file->storeAs('profile', $filename, 'public');
+            // Simpan file -> mengembalikan path relatif, mis: "profile/1654xxx.jpg"
+            $path = $file->store('profile', 'public');
 
-            // Hapus file lama dari disk 'public'
-            if ($user->photo && Storage::disk('public')->exists('profile/' . $user->photo)) {
+            // Hapus file lama jika ada (kamu simpan path penuh di DB sekarang)
+            if ($user->photo && Storage::disk('public')->exists($user->photo)) {
+                Storage::disk('public')->delete($user->photo);
+            } elseif ($user->photo && Storage::disk('public')->exists('profile/' . $user->photo)) {
+                // fallback kalau di DB masih ada hanya nama file
                 Storage::disk('public')->delete('profile/' . $user->photo);
             }
 
-            $user->photo = $filename;
+            // Simpan path penuh ke DB (sesuai standar)
+            $user->photo = $path;
             $user->save();
 
             return back()->with('success', 'Foto berhasil diperbarui!');

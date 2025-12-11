@@ -12,19 +12,21 @@ class Account extends Authenticatable
     protected $table = 'accounts';
 
     protected $fillable = [
-    'nama_lengkap',
-    'username',
-    'email',
-    'password',
-    'role',
-    'is_active',
-    'last_login_at',
-    'phone',
-    'birthdate',
-    'weight',
-    'height',
-    'photo',
-];
+        'nama_lengkap',
+        'username',
+        'email',
+        'password',
+        'role',
+        'is_active',
+        'last_login_at',
+        'phone',
+        'birthdate',
+        'weight',
+        'height',
+        'photo',
+        'google_id',
+        'google_avatar',
+    ];
 
     public $timestamps = true;
 

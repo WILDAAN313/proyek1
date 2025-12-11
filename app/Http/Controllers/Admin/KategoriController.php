@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Kategori;
+use App\Models\kategori;
 use Illuminate\Http\Request;
 
 class KategoriController extends Controller
@@ -13,7 +13,7 @@ class KategoriController extends Controller
         $title = 'Data Kategori';
         $slug = 'kategori';
 
-        $kategori = Kategori::all();
+        $kategori = kategori::all();
 
         return view('admin.kategori.index', compact('title', 'slug', 'kategori'));
     }
@@ -32,7 +32,7 @@ class KategoriController extends Controller
             'nama_kategori' => 'required|string|max:255|unique:kategori,nama_kategori',
         ]);
 
-        Kategori::create([
+        kategori::create([
             'nama_kategori' => $request->nama_kategori,
         ]);
 
@@ -44,15 +44,14 @@ class KategoriController extends Controller
         $title = 'Update Kategori';
         $slug = 'kategori';
 
-        $kategori = Kategori::findOrFail($id);
+        $kategori = kategori::findOrFail($id);
 
         return view('admin.kategori.update', compact('title', 'slug', 'kategori'));
     }
 
     public function update(Request $request, int $id)
     {
-        $kategori = Kategori::findOrFail($id);
-
+        $kategori = kategori::findOrFail($id);
         $request->validate([
             'nama_kategori' => 'required|string|max:255|unique:kategori,nama_kategori,' . $id,
         ]);
@@ -60,14 +59,12 @@ class KategoriController extends Controller
         $kategori->update([
             'nama_kategori' => $request->nama_kategori,
         ]);
-
         return redirect()->route('admin.kategori.index')->with('success', 'Kategori berhasil diperbarui!');
     }
 
     public function destroy(int $id)
     {
-        Kategori::destroy($id);
-
+        kategori::destroy($id);
         return redirect()->route('admin.kategori.index')->with('success', 'Kategori berhasil dihapus!');
     }
 }

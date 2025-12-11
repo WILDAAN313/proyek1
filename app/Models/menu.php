@@ -14,10 +14,9 @@ class Menu extends Model
     protected $fillable = [
         'nama_menu',
         'deskripsi',
-        'gambar',
         'kalori',
         'waktu_memasak',
+        'gambar',
+        'dibaca',
     ];
-
-
 }
