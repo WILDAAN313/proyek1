@@ -37,7 +37,7 @@
 
         .hero-illustration img {
             width: 100%;
-            height: 360px;
+            height: 340px;
             object-fit: cover;
         }
 
