@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container mt-4">
+        <h3 class="fw-bold mb-3">Daftar Artikel</h3>
 
         <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
             <form class="d-flex" action="#" method="GET">

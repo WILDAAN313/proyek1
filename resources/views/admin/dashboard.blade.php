@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <h3 class="fw-bold mb-3">Dashboard Admin</h3>
+        <h3 class="fw-bold mb-3 mt-3">Dashboard Admin</h3>
 
         <div class="row g-4 mb-4">
             <div class="col-md-3">

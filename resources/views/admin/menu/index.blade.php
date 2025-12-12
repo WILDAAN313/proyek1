@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <h3 class="fw-bold mb-3">Daftar Menu Sehat</h3>
+        <h3 class="fw-bold mb-3 mt-3">Daftar Menu Sehat</h3>
 
         <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
           
