@@ -98,7 +98,7 @@
                     class="w-full flex items-center justify-center gap-3 border border-gray-300 py-2 rounded-lg hover:bg-gray-100 transition">
                     <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="w-5 h-5"
                         alt="Google Logo">
-                    <span class="text-gray-700 font-medium">Register dengan Google</span>
+                    <span class="text-gray-700 font-medium">Daftar dengan Google</span>
                 </a>
             </div>
         </template>
