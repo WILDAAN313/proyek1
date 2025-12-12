@@ -5,10 +5,10 @@
         <h3 class="fw-bold mb-3 mt-3">Daftar Menu Sehat</h3>
 
         <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
-          
-            <form class="d-flex" action="#" method="GET">
+
+            <form class="d-flex" action="{{ route('admin.menu.index') }}" method="GET">
                 <div class="input-group">
-                    <input type="text" name="search" class="form-control" placeholder="Cari Jadwal Menu"
+                    <input type="text" name="search" class="form-control" placeholder="Cari Menu"
                         value="{{ request('search') }}">
                     <button class="btn btn-outline-success" type="submit" aria-label="Cari">
                         <i class="bi bi-search"></i>
@@ -16,7 +16,8 @@
                 </div>
             </form>
 
-                 <a href="{{ route('admin.menu.create') }}" class="btn btn-success">
+
+            <a href="{{ route('admin.menu.create') }}" class="btn btn-success">
                 <i class="bi bi-plus-lg me-1"></i> Tambah Menu
             </a>
         </div>
@@ -44,10 +45,7 @@
                             <td>{{ $index + 1 }}</td>
                             <td>
                                 <img src="{{ $item->gambar ? Storage::url($item->gambar) : 'https://via.placeholder.com/80x80' }}"
-                                    alt="Menu {{ $item->nama_menu }}"
-                                    class="rounded"
-                                    width="100"
-                                    height="100">
+                                    alt="Menu {{ $item->nama_menu }}" class="rounded" width="100" height="100">
                             </td>
                             <td class="text-start">{{ $item->nama_menu }}</td>
                             <td>{{ !is_null($item->kalori ?? null) ? $item->kalori . ' kkal' : '-' }}</td>
@@ -57,7 +55,8 @@
                                 <a href="{{ route('admin.menu.edit', $item->id) }}" class="btn btn-sm btn-primary">
                                     <i class="bi bi-pencil-square me-1"></i> Edit
                                 </a>
-                                <form action="{{ route('admin.menu.destroy', $item->id) }}" method="POST" class="d-inline">
+                                <form action="{{ route('admin.menu.destroy', $item->id) }}" method="POST"
+                                    class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-sm btn-danger"
@@ -69,9 +68,13 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="text-muted">Belum ada data menu</td>
+                            <td colspan="7" class="text-muted">
+                                Tidak ada menu
+                                ditemukan{{ request('search') ? ' untuk pencarian "' . request('search') . '"' : '' }}.
+                            </td>
                         </tr>
                     @endforelse
+
                 </tbody>
             </table>
         </div>

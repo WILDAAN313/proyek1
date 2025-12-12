@@ -24,34 +24,45 @@
                         href="{{ route('kalkulator') }}">Kalkulator BMI</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-3 {{ request()->is('menu*') ? 'fw-semibold text-success' : '' }}"
+                    <a class="nav-link px-3 {{ request()->is('menu') ? 'fw-semibold text-success' : '' }}"
                         href="{{ route('menu') }}">Menu Sehat</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-3 {{ request()->is('artikel*') ? 'fw-semibold text-success' : '' }}"
+                    <a class="nav-link px-3 {{ request()->is('artikel') ? 'fw-semibold text-success' : '' }}"
                         href="{{ route('artikel.index') }}">Artikel</a>
                 </li>
                 <li class="nav-item ms-lg-2">
                     @if (Auth::check())
                         @php
-                            $user = Auth::user();
 
-                            // Tentukan URL foto yang dipakai
-                            if (!empty($user->google_avatar)) {
-                                // Jika avatar Google berupa URL langsung (http)
-                                $profilePhoto = Str::startsWith($user->google_avatar, 'http')
-                                    ? $user->google_avatar
-                                    : Storage::url($user->google_avatar);
-                            } elseif (!empty($user->photo)) {
-                                // Jika foto upload biasa
-                                $profilePhoto = Storage::url($user->photo);
-                            } else {
-                                // Default avatar
-                                $profilePhoto = asset('default-user.png');
+                            $user = Auth::user();
+                            $profilePhoto = asset('default-user.png'); // default
+
+                            if (!empty($user->photo)) {
+                                // Foto upload user — selalu prioritas
+                                $path = $user->photo;
+                                $profilePhoto = Storage::url($path);
+
+                                // Cache buster agar foto baru langsung muncul
+                                if (Storage::disk('public')->exists($path)) {
+                                    $profilePhoto .= '?v=' . Storage::disk('public')->lastModified($path);
+                                }
+                            } elseif (!empty($user->google_avatar)) {
+                                // Jika avatar google berupa URL penuh
+                                if (Str::startsWith($user->google_avatar, 'http')) {
+                                    $profilePhoto = $user->google_avatar;
+                                } else {
+                                    // Jika google_avatar disimpan sebagai file (profile/xxxx.jpg)
+                                    $path = $user->google_avatar;
+                                    $profilePhoto = Storage::url($path);
+
+                                    if (Storage::disk('public')->exists($path)) {
+                                        $profilePhoto .= '?v=' . Storage::disk('public')->lastModified($path);
+                                    }
+                                }
                             }
                         @endphp
 
-                        {{-- Foto profil berbentuk bulat --}}
                         <a href="{{ route('test.profile') }}" class="d-inline-block"
                             style="width:30px; height:30px; border-radius:50%; overflow:hidden;">
                             <img src="{{ $profilePhoto }}" alt="Profile"

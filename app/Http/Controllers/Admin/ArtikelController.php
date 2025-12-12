@@ -11,11 +11,19 @@ use Illuminate\Support\Str;
 
 class ArtikelController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $data = artikel::latest()->paginate(10);
-        return view('admin.artikel.index', compact('data'));
+        $search = $request->search;
+
+        $data = Artikel::when($search, function ($query) use ($search) {
+            $query->where('judul', 'LIKE', "%{$search}%");
+        })
+            ->latest()
+            ->paginate(10);
+
+        return view('admin.artikel.index', compact('data', 'search'));
     }
+
     public function create()
     {
         $kategori = kategori::all();

@@ -5,9 +5,9 @@
         <h3 class="fw-bold mb-3">Daftar Artikel</h3>
 
         <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
-            <form class="d-flex" action="#" method="GET">
+            <form class="d-flex" action="{{ route('admin.artikel.index') }}" method="GET">
                 <div class="input-group">
-                    <input type="text" name="search" class="form-control" placeholder="Cari Artikel"
+                    <input type="text" name="search" class="form-control" placeholder="Cari Artikel..."
                         value="{{ request('search') }}">
                     <button class="btn btn-outline-success" type="submit" aria-label="Cari">
                         <i class="bi bi-search"></i>
@@ -71,11 +71,15 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="text-center text-muted">
-                                Belum ada artikel
+                            <td colspan="7" class="text-center text-muted">
+                                Tidak ada artikel ditemukan
+                                @if (request('search'))
+                                    untuk pencarian "<strong>{{ request('search') }}</strong>"
+                                @endif
                             </td>
                         </tr>
                     @endforelse
+
                 </tbody>
             </table>
 

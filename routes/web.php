@@ -33,9 +33,10 @@ Route::match(['GET', 'POST'], '/logout', [AuthCustomController::class, 'logout']
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::prefix('test')->group(function () {
     Route::put('/profile/update', [ProfileController::class, 'update'])->name('test.profile.update');
-    Route::get('/profile', function () {
-        return view('pages.profile');
-    })->name('test.profile');
+    Route::get('/profile', [ProfileController::class, 'halamanProfile'])->name('test.profile');
+    // Route::get('/profile', function () {
+    //     return view('pages.profile');
+    // })->name('test.profile');
 });
 Route::get('/menu', [MenuController::class, 'showUser'])->name('menu');
 Route::get('/menu/{id}', [MenuController::class, 'showDetail'])->name('menu.show');

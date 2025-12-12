@@ -1,5 +1,6 @@
 @extends('layouts.main')
 
+@section('title', $title)
 @section('content')
     @php
         $featuredId = optional($featured)->id;
@@ -9,6 +10,99 @@
         .artikel-hero {
             background: #e9f6ef;
             padding: 50px 0 30px;
+        }
+
+        .fitlife-icon {
+            width: 80px;
+            height: 80px;
+            background: #e8f8ef;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fitlife-icon i {
+            font-size: 42px;
+            color: #1fb879;
+        }
+
+        .search-wrapper {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #dfe8e4;
+        }
+
+        .search-wrapper .form-control {
+            border: none !important;
+            box-shadow: none !important;
+            padding: 12px 48px 12px 14px;
+            border-radius: 12px !important;
+            font-size: 14px;
+        }
+
+        .search-wrapper .form-control::placeholder {
+            opacity: 0.7;
+            font-size: 14px;
+        }
+
+        .search-button {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            color: #444;
+            padding: 4px;
+            z-index: 10;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: opacity .12s ease;
+        }
+
+        .search-button:hover i {
+            opacity: 0.8;
+        }
+
+        .clear-x {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100 !important;
+        }
+
+        .clear-x i:hover {
+            color: #222;
+        }
+
+        .featured-box {
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+            background: #ffffff;
+        }
+
+        .pill {
+            display: inline-block;
+            width: fit-content;
+            max-width: max-content;
+            padding: 8px 14px;
+            background: #e7f8ef;
+            color: #0da36b;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 12px;
+            white-space: nowrap;
         }
 
         .artikel-card {
@@ -32,41 +126,14 @@
             object-fit: cover;
         }
 
-        .featured-box {
-            border-radius: 22px;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
-            background: #ffffff;
-        }
-
-        .pill {
-            display: inline-block;
-            padding: 8px 14px;
-            background: #e7f8ef;
-            color: #0da36b;
-            border-radius: 999px;
-            font-weight: 600;
-            font-size: 12px;
-        }
-
-        .fitlife-icon {
-            width: 80px;
-            height: 80px;
-            background: #e8f8ef;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .fitlife-icon i {
-            font-size: 42px;
-            color: #1fb879;
-        }
-
-        .input-group-lg .form-control::placeholder {
+        .search-kecil {
             font-size: 14px;
-            opacity: 0.7;
+        }
+
+        @media (max-width: 576px) {
+            .search-wrapper .form-control {
+                padding: 10px 44px 10px 12px;
+            }
         }
     </style>
 
@@ -75,15 +142,21 @@
             <div class="fitlife-icon mx-auto mb-2"><i class="bi bi-journal-text"></i></div>
             <h2 class="fw-bold mb-2">Artikel Diet & Kesehatan</h2>
             <p class="text-muted mb-4">Baca artikel terbaru seputar diet, nutrisi, dan tips hidup sehat dari para ahli</p>
-            <div class="mx-auto" style="max-width: 540px;">
-                <div class="input-group input-group-lg">
-                    <span class="input-group-text bg-white border-end-0">
+            <form action="{{ route('artikel.index') }}" method="GET" class="mx-auto" style="max-width: 540px;">
+                <div class="input-group input-group-lg position-relative search-wrapper">
+                    <input type="text" name="kategori" id="searchKategori" class="form-control search-kecil"
+                        placeholder="Cari berdasarkan kategori" value="{{ request('kategori') }}" autocomplete="off">
+                    <button type="submit" class="search-button" id="btnSearch" aria-label="Cari">
                         <i class="bi bi-search"></i>
-                    </span>
-                    <input type="text" class="form-control border-start-0"
-                        placeholder="Cari berdasarkan kategori yang diinginkan" readonly>
+                    </button>
+                    @if (request()->filled('kategori'))
+                        <button type="button" id="clearSearch" class="clear-x position-absolute" title="Reset"
+                            style="right: 12px; top: 50%; transform: translateY(-50%); z-index: 100;">
+                            <i class="bi bi-x-lg" style="font-size:16px; color:#555;"></i>
+                        </button>
+                    @endif
                 </div>
-            </div>
+            </form>
         </div>
     </section>
 
@@ -99,7 +172,7 @@
                         <div class="col-md-6 p-4 d-flex flex-column justify-content-center">
                             <div class="pill mb-3">{{ $featured->kategori ?? 'Artikel Unggulan' }}</div>
                             <h3 class="fw-bold mb-2">{{ $featured->judul }}</h3>
-                            <p class="text-muted">{{ Str::limit(strip_tags($featured->isi), 180) }}</p>
+                            <p class="text-muted">{!! Str::limit(strip_tags($featured->isi), 180) !!}</p>
                             <div class="text-muted small mb-3">
                                 <i
                                     class="bi bi-calendar me-1"></i>{{ $featured->created_at?->format('d F Y') ?? 'Terbit terbaru' }}
@@ -145,4 +218,49 @@
             </div>
         </div>
     </section>
+
+    <script>
+        (function() {
+            const input = document.getElementById('searchKategori');
+            const btnSearch = document.getElementById('btnSearch');
+            const btnClear = document.getElementById('clearSearch');
+            const form = input ? input.closest('form') : null;
+
+            if (!input || !btnSearch) return;
+
+            input.style.paddingRight = '56px';
+
+            input.addEventListener('focus', () => {
+                btnSearch.style.opacity = '1';
+                btnSearch.style.pointerEvents = 'auto';
+            });
+            input.addEventListener('input', () => {
+                btnSearch.style.opacity = '1';
+            });
+
+            input.addEventListener('blur', () => {
+            });
+
+            form?.addEventListener('submit', () => {
+                btnSearch.style.opacity = '0';
+                btnSearch.style.pointerEvents = 'none';
+            });
+
+            if (btnClear) {
+                btnClear.addEventListener('click', () => {
+                    input.value = '';
+                    window.location.href = "{{ route('artikel.index') }}";
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                if (btnClear) {
+                    btnClear.style.display = 'inline-flex';
+                    btnSearch.style.opacity = '0';
+                } else {
+                    btnSearch.style.opacity = '1';
+                }
+            });
+        })();
+    </script>
 @endsection

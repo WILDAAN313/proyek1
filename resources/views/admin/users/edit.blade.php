@@ -44,7 +44,7 @@
             <input type="file" name="photo" class="form-control">
         </div>
 
-        <button class="btn btn-primary">Perbarui</button>
+        <button class="btn btn-primary">Update</button>
         <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">Kembali</a>
     </form>
 </div>

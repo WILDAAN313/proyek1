@@ -4,17 +4,28 @@
 
 @section('content')
     <style>
-        /* existing styles omitted for brevity (keep your current styles) */
-        /* --- overlay + blur styles --- */
+        .fitlife-icon {
+            width: 80px;
+            height: 80px;
+            background: #e8f8ef;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fitlife-icon i {
+            font-size: 42px;
+            color: #1fb879;
+        }
+
         .kalk-page-wrapper {
             position: relative;
         }
 
-        /* blur target */
         .kalk-page-wrapper.locked .kalk-content {
             filter: blur(10px) saturate(.95);
             pointer-events: none;
-            /* disable interactions */
             user-select: none;
             opacity: 0.9;
         }
@@ -22,12 +33,10 @@
         .kalk-overlay {
             position: absolute;
             inset: 0;
-            /* top:0;right:0;bottom:0;left:0; */
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 999;
-            /* above content */
             pointer-events: auto;
         }
 
@@ -79,7 +88,6 @@
             gap: 8px;
         }
 
-        /* dot (ukuran kecil) */
         .bmi-dot {
             width: 12px;
             height: 12px;
@@ -89,31 +97,28 @@
             box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
         }
 
-        /* warna sesuai kategori */
         .dot-low {
             background: #2bb3d6;
         }
 
-        /* biru */
         .dot-normal {
             background: #1fb879;
         }
 
-        /* hijau FitLife */
         .dot-over {
             background: #f2cf4d;
         }
 
-        /* kuning */
         .dot-obese {
             background: #ff6b6b;
         }
 
-        /* merah */
-
-        /* spacing helper (bootstrap me-2 used; if not using bootstrap, you can omit .me-2) */
         .me-2 {
             margin-right: .5rem !important;
+        }
+
+        .page-bottom-space {
+            padding-bottom: 150px;
         }
     </style>
 
@@ -124,22 +129,16 @@
         <div class="kalk-content">
             <section class="calc-hero text-center">
                 <div class="container">
-                    <div class="fitlife-icon mx-auto mb-2 mt-3">
-                        <i class="bi bi-activity"></i>
-                    </div>
-
-                    <h2 class="fw-bold mb-1">Kalkulator BMI</h2>
-
-                    <p class="mb-2 subtitle">
+                    <div class="fitlife-icon mx-auto mb-2 mt-5"><i class="bi bi-activity"></i></div>
+                    <h2 class="fw-bold">Kalkulator BMI</h2>
+                    <p class="text-muted">
                         Hitung indeks massa tubuh dan dapatkan rekomendasi kategori kesehatan Anda
                     </p>
-
                     <div class="hero-divider" aria-hidden="true"></div>
                 </div>
             </section>
             <div class="container page-bottom-space">
                 <style>
-                    /* ringkasan styling — pakai grid Bootstrap, tambahkan sedikit gap */
                     .calc-row {
                         --bs-gutter-x: 28px;
                         --bs-gutter-y: 24px;
@@ -159,7 +158,6 @@
                         height: 100%;
                     }
 
-                    /* pastikan overlay/locked tidak menutup info-card (hanya berlaku kalau overlay muncul) */
                     .kalk-overlay {
                         z-index: 999;
                     }
@@ -171,7 +169,6 @@
                 </style>
 
                 <div class="row calc-row align-items-start">
-                    <!-- Kalkulator: gunakan 7 kolom di lg agar ada ruang kanan -->
                     <div class="col-lg-7 col-md-8">
                         <div class="card calc-card p-4 h-100">
                             <form method="POST" action="{{ route('kalkulator') }}">
@@ -207,7 +204,6 @@
                                 </div>
                             @endif
 
-                            {{-- kecil-kecil di bawah card --}}
                             <div class="d-flex justify-content-center gap-4 mt-3 small text-muted flex-wrap">
                                 <div class="d-flex align-items-center gap-2">
                                     <i class="bi bi-stopwatch"></i> <span>Hasil cepat & praktis</span>
@@ -227,7 +223,6 @@
                         </div>
                     </div>
 
-                    <!-- Info card tetap terlihat di kanan: gunakan 5 kolom -->
                     <div class="col-lg-5 col-md-6">
                         <div class="info-card">
                             <h4>Tentang BMI</h4>
@@ -247,7 +242,6 @@
                             </ul>
 
                             <hr>
-
                             <h6 class="fw-bold">Tips singkat</h6>
                             <ul class="small text-muted" style="padding-left:18px;">
                                 <li>Perbanyak sayur, kurangi gula dan makanan olahan.</li>
@@ -261,7 +255,6 @@
 
         </div>
 
-        {{-- Overlay only visible to guests --}}
         @guest
             <div class="kalk-overlay">
                 <div class="card text-center">

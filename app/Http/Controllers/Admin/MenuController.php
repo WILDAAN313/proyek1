@@ -9,11 +9,17 @@ use Illuminate\Support\Facades\Storage;
 
 class MenuController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $menus = Menu::latest()->get();
-        return view('admin.menu.index', compact('menus'));
+        $search = $request->search;
+
+        $menus = Menu::when($search, function ($query) use ($search) {
+            $query->where('nama_menu', 'LIKE', "%{$search}%");
+        })->latest()->get();
+
+        return view('admin.menu.index', compact('menus', 'search'));
     }
+
 
     public function create()
     {
@@ -79,7 +85,7 @@ class MenuController extends Controller
     {
         $menu = Menu::findOrFail($id);
 
-       
+
         if ($menu->gambar && Storage::disk('public')->exists($menu->gambar)) {
             Storage::disk('public')->delete($menu->gambar);
         }

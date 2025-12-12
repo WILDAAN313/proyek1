@@ -80,17 +80,25 @@ class UserController extends Controller
         }
 
         if ($request->hasFile('photo')) {
+            // hapus file lama (cek beberapa kemungkinan format path)
             if ($user->photo) {
-                Storage::disk('public')->delete($user->photo);
+                if (Storage::disk('public')->exists($user->photo)) {
+                    Storage::disk('public')->delete($user->photo);
+                } elseif (Storage::disk('public')->exists('profile/' . $user->photo)) {
+                    Storage::disk('public')->delete('profile/' . $user->photo);
+                }
             }
 
-            $data['photo'] = $request->file('photo')->store('profile', 'public');
+            // simpan path lengkap yang dikembalikan Storage
+            $path = $request->file('photo')->store('profile', 'public'); // => "profile/xxx.jpg"
+            $data['photo'] = $path;
         }
 
         $user->update($data);
 
         return redirect()->route('admin.users.index')->with('success', 'Pengguna berhasil diperbarui.');
     }
+
 
     public function destroy($id)
     {

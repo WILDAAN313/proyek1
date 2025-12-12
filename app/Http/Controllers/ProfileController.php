@@ -8,8 +8,16 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
+
+    public function halamanProfile()
+    {
+        $title = "Profil";
+        $user = Auth::user();
+        return view('pages.profile', compact('user', 'title'));
+    }
     public function update(Request $request)
     {
+        $title = "Profil";
         $user = Auth::user();
 
         if ($request->hasFile('photo')) {

@@ -1,5 +1,6 @@
 @extends('layouts.main')
 
+@section('title', $title)
 @section('content')
     <style>
         .menu-hero {
@@ -20,11 +21,10 @@
 
         .detail-img {
             width: 100%;
-            height: 320px;
+            height: 450px;
             object-fit: cover;
         }
 
-        /* agar tombol kembali dan header terlihat rapi */
         .detail-header {
             margin-bottom: 18px;
         }
