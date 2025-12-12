@@ -46,13 +46,13 @@
                                 <img src="{{ $item->gambar ? Storage::url($item->gambar) : 'https://via.placeholder.com/80x80' }}"
                                     alt="Menu {{ $item->nama_menu }}"
                                     class="rounded"
-                                    width="80"
-                                    height="80">
+                                    width="100"
+                                    height="100">
                             </td>
                             <td class="text-start">{{ $item->nama_menu }}</td>
                             <td>{{ !is_null($item->kalori ?? null) ? $item->kalori . ' kkal' : '-' }}</td>
                             <td>{{ !is_null($item->waktu_memasak ?? null) ? $item->waktu_memasak . ' menit' : '-' }}</td>
-                            <td class="text-start">{{ Str::limit($item->deskripsi, 80) }}</td>
+                            <td class="text-start">{!! Str::limit($item->deskripsi, 80) !!}</td>
                             <td>
                                 <a href="{{ route('admin.menu.edit', $item->id) }}" class="btn btn-sm btn-primary">
                                     <i class="bi bi-pencil-square me-1"></i> Edit

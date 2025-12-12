@@ -7,7 +7,6 @@
         <a class="navbar-brand d-flex align-items-center fw-bold" href="{{ route('home') }}" style="color:#1fb879;">
             <img src="{{ asset('images/logo.png') }}" alt="FitLife Logo" class="me-2"
                 style="width:36px; height:36px; object-fit:contain;">
-
             FitLife.id
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">

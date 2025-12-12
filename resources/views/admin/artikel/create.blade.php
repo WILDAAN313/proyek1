@@ -31,9 +31,14 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Isi</label>
-                <textarea name="isi" rows="6" class="form-control" required>{{ old('isi') }}</textarea>
-            </div>
+            <label>isi</label>
+            <textarea name="isi" id="isi" rows="8" class="form-control @error('isi') is-invalid @enderror"
+                placeholder="Tulis isi artikel di sini..."></textarea>
+
+            @error('isi')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
 
             <div class="mb-3">
                 <label class="form-label">Gambar</label>
@@ -52,4 +57,19 @@
             <a href="{{ route('admin.artikel.index') }}" class="btn btn-secondary">Kembali</a>
         </form>
     </div>
+
+    {{-- TinyMCE Rich Text Editor --}}
+    <script src="https://cdn.jsdelivr.net/npm/tinymce@6.8.2/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+        tinymce.init({
+            selector: 'textarea#isi',
+            height: 300,
+            menubar: false,
+            plugins: 'lists link image preview code',
+            toolbar: 'undo redo | bold italic underline | bullist numlist | link image | code preview',
+            branding: false,
+            placeholder: "Tulis isi artikel..."
+        });
+    </script>
 @endsection

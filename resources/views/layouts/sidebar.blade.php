@@ -73,7 +73,11 @@
 
 <body>
     <div class="sidebar">
-        <h4 class="text-success fw-bold mb-4">FitLife.id</h4>
+        <a class="navbar-brand d-flex align-items-center fw-bold" href="#" style="color:#1fb879;">
+            <img src="{{ asset('images/logo.png') }}" alt="FitLife Logo" class="me-2"
+                style="width:36px; height:36px; object-fit:contain;">
+            FitLife.id
+        </a>
 
         <a href="{{ route('admin.dashboard') }}" class="{{ request()->is('admin') ? 'active' : '' }}">
             <i class="bi bi-house-door"></i> Dashboard

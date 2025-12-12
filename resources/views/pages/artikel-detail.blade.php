@@ -67,7 +67,7 @@
             <div class="p-4">
                 <div class="mb-3 text-muted small">Ditulis oleh {{ $artikel->penulis ?? 'Admin' }}</div>
                 <div class="fs-6" style="line-height: 1.7rem;">
-                    {!! nl2br(e($artikel->isi)) !!}
+                    {!! $artikel->isi !!}
                 </div>
             </div>
         </div>
@@ -89,7 +89,7 @@
                                     </div>
 
                                     <div class="text-muted mb-2">
-                                        {{ Str::limit(strip_tags($a->isi), 80) }}
+                                        {!! Str::limit(strip_tags($a->isi), 80) !!}
                                     </div>
 
                                     <a href="{{ route('artikel.show', $a->slug) }}" class="btn btn-outline-success w-100">

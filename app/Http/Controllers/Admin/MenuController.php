@@ -34,6 +34,8 @@ class MenuController extends Controller
             $data['gambar'] = $request->file('gambar')->store('menu', 'public');
         }
 
+        // dd($data);
+
         Menu::create($data);
 
         return redirect()->route('admin.menu.index')

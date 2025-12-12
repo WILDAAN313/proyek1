@@ -32,8 +32,13 @@
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Isi</label>
-            <textarea name="isi" rows="6" class="form-control" required>{{ old('isi', $artikel->isi) }}</textarea>
+            <label>Isi</label>
+            {{-- textarea sekarang menggunakan name="isi" dan id="isi" untuk TinyMCE --}}
+            <textarea name="isi" id="isi" class="form-control @error('isi') is-invalid @enderror" rows="8"
+                required>{{ old('isi', $artikel->isi) }}</textarea>
+            @error('isi')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
@@ -55,4 +60,29 @@
         <a href="{{ route('admin.artikel.index') }}" class="btn btn-secondary">Kembali</a>
     </form>
 </div>
+
+{{-- TinyMCE: jika layout sudah memuat tinymce.js, hapus tag <script src=...> berikut agar tidak duplikat --}}
+    <script src="https://cdn.jsdelivr.net/npm/tinymce@6.8.2/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof tinymce === 'undefined') {
+                console.error('TinyMCE tidak ditemukan. Pastikan script tinymce telah dimuat.');
+                return;
+            }
+
+            tinymce.init({
+                selector: 'textarea#isi',
+                height: 350,
+                menubar: false,
+                plugins: 'lists link image media table code preview paste',
+                toolbar: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright | bullist numlist outdent indent | link image media | removeformat | code preview',
+                branding: false,
+                relative_urls: false,
+                remove_script_host: false,
+                convert_urls: true,
+                content_style: "body { font-family: 'Poppins', sans-serif; font-size:14px }"
+            });
+        });
+    </script>
 @endsection

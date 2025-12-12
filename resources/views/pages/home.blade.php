@@ -181,7 +181,7 @@
                                         </div>
                                         <div>
                                             <h6 class="fw-bold mb-1">{{ $menu->nama_menu }}</h6>
-                                            <p class="small text-muted mb-2">{{ Str::limit($menu->deskripsi, 80) }}</p>
+                                            <p class="small text-muted mb-2">{!! Str::limit($menu->deskripsi, 80)!!}</p>
                                             <div class="d-flex flex-wrap gap-3 text-muted small mb-2">
                                                 <span class="d-flex align-items-center gap-1">
                                                     <i class="bi bi-fire text-danger"></i>
@@ -220,7 +220,7 @@
                                     </div>
                                     <div class="small text-success fw-semibold mb-1">{{ $artikel->kategori ?? 'Artikel' }}</div>
                                     <h6 class="fw-bold mb-1">{{ $artikel->judul }}</h6>
-                                    <p class="small text-muted mb-2">{{ Str::limit(strip_tags($artikel->isi), 90) }}</p>
+                                    <p class="small text-muted mb-2">{!!Str::limit(strip_tags($artikel->isi), 90)!!}</p>
                                     <a href="{{ route('artikel.show', $artikel->slug) }}" class="text-success small fw-semibold">Baca selengkapnya</a>
                                 </div>
                             </div>

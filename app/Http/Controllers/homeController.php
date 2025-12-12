@@ -14,8 +14,8 @@ class HomeController extends Controller
         $slug = "home";
         $konten = "Selamat Datang di FitLife!";
 
-        $featuredMenus = Menu::latest()->take(3)->get();
-        $latestArticles = Artikel::latest()->take(3)->get();
+        $featuredMenus = Menu::latest()->take(6)->get();
+        $latestArticles = Artikel::latest()->take(4)->get();
         $heroHighlight = $latestArticles->first();
 
         return view('pages.home', compact(

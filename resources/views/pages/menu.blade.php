@@ -126,7 +126,7 @@
                                     <h5 class="fw-bold mb-0">{{ $item->nama_menu }}</h5>
                                     <span class="badge bg-success-subtle text-success">Sehat</span>
                                 </div>
-                                <p class="text-muted small mb-0">{{ Str::limit($item->deskripsi, 120) }}</p>
+                                <p class="text-muted small mb-0">{!!  Str::limit($item->deskripsi, 120) !!}</p>
                             </div>
                             <div class="menu-meta d-flex justify-content-between align-items-center">
                                 <div class="meta-item">

@@ -82,7 +82,7 @@
                     </div>
                 </div>
 
-                <p class="fs-6" style="line-height:1.7rem;">{{ $menu->deskripsi }}</p>
+                <p class="fs-6" style="line-height:1.7rem;">{!!$menu->deskripsi !!}</p>
             </div>
         </div>
     </div>
