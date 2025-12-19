@@ -40,4 +40,9 @@ class Account extends Authenticatable
     {
         return $this->nama_lengkap ?? $this->username;
     }
+
+    public function getBirthdateAttribute($value)
+    {
+        return $value;
+    }
 }

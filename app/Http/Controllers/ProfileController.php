@@ -26,8 +26,6 @@ class ProfileController extends Controller
             ]);
 
             $file = $request->file('photo');
-
-            // Simpan file -> mengembalikan path relatif, mis: "profile/1654xxx.jpg"
             $path = $file->store('profile', 'public');
 
             // Hapus file lama jika ada (kamu simpan path penuh di DB sekarang)

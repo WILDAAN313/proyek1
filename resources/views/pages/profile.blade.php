@@ -170,8 +170,8 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label class="form-label">Nama Lengkap</label>
-                        <input type="text" name="nama_lengkap" class="form-control editable"
-                            value="{{ old('nama_lengkap', Auth::user()->nama_lengkap) }}" readonly>
+                        <input type="text" name="name" class="form-control editable"
+                            value="{{ old('name', Auth::user()->name) }}" readonly>
                     </div>
 
                     <div class="col-md-6">
