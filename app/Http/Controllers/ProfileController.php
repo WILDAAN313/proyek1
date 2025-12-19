@@ -15,51 +15,47 @@ class ProfileController extends Controller
         $user = Auth::user();
         return view('pages.profile', compact('user', 'title'));
     }
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $title = "Profil";
-        $user = Auth::user();
-
-        if ($request->hasFile('photo')) {
-            $request->validate([
-                'photo' => 'image|mimes:jpg,jpeg,png|max:2048',
-            ]);
-
-            $file = $request->file('photo');
-            $path = $file->store('profile', 'public');
-
-            // Hapus file lama jika ada (kamu simpan path penuh di DB sekarang)
-            if ($user->photo && Storage::disk('public')->exists($user->photo)) {
-                Storage::disk('public')->delete($user->photo);
-            } elseif ($user->photo && Storage::disk('public')->exists('profile/' . $user->photo)) {
-                // fallback kalau di DB masih ada hanya nama file
-                Storage::disk('public')->delete('profile/' . $user->photo);
-            }
-
-            // Simpan path penuh ke DB (sesuai standar)
-            $user->photo = $path;
-            $user->save();
-
-            return back()->with('success', 'Foto berhasil diperbarui!');
-        }
+        $user = Account::findOrFail($id);
 
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:accounts,email,' . $user->id,
-            'phone' => 'nullable|string|max:20',
-            'birthdate' => 'nullable|date',
-            'weight' => 'nullable|numeric',
-            'height' => 'nullable|numeric',
+            'nama_lengkap' => 'required',
+            'username' => "required|unique:accounts,username,$id",
+            'email' => "required|email|unique:accounts,email,$id",
+            'role' => 'required',
+            'photo' => 'nullable|image|max:2048',
         ]);
 
-        $user->nama_lengkap = $request->name;
-        $user->email = $request->email;
-        $user->phone = $request->phone;
-        $user->birthdate = $request->birthdate;
-        $user->weight = $request->weight;
-        $user->height = $request->height;
-        $user->save();
+        $data = $request->except('photo');
 
-        return back()->with('success', 'Profil berhasil diperbarui!');
+        if ($request->filled('password')) {
+            $data['password'] = Hash::make($request->password);
+        } else {
+            unset($data['password']);
+        }
+
+        if ($request->password) {
+            $data['password'] = Hash::make($request->password);
+        }
+
+        if ($request->hasFile('photo')) {
+            // hapus file lama (cek beberapa kemungkinan format path)
+            if ($user->photo) {
+                if (Storage::disk('public')->exists($user->photo)) {
+                    Storage::disk('public')->delete($user->photo);
+                } elseif (Storage::disk('public')->exists('profile/' . $user->photo)) {
+                    Storage::disk('public')->delete('profile/' . $user->photo);
+                }
+            }
+
+            // simpan path lengkap yang dikembalikan Storage
+            $path = $request->file('photo')->store('profile', 'public'); // => "profile/xxx.jpg"
+            $data['photo'] = $path;
+        }
+
+        $user->update($data);
+
+        return redirect()->route('admin.users.index')->with('success', 'Pengguna berhasil diperbarui.');
     }
 }

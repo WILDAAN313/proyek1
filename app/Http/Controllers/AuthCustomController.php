@@ -70,42 +70,29 @@ class AuthCustomController extends Controller
             return back()->with('error', 'Nama atau password salah.');
         }
 
-        if ($user->password !== $request->password) {
+        if (! Hash::check($request->password, $user->password)) {
             return back()->with('error', 'Nama atau password salah.');
         }
 
-        // login dan session
         Auth::login($user);
         $request->session()->regenerate();
 
-        // update status jika kolom tersedia
-        $dirty = false;
+        // update status login
         if (Schema::hasColumn('accounts', 'is_active')) {
             $user->is_active = true;
-            $dirty = true;
         }
         if (Schema::hasColumn('accounts', 'last_login_at')) {
             $user->last_login_at = now();
-            $dirty = true;
         }
-        if ($dirty) {
-            $user->save();
-        }
+        $user->save();
 
-        // tentukan tujuan redirect
-        $usernameLower   = \Illuminate\Support\Str::lower($user->username);
-        $hasRoleColumn   = \Illuminate\Support\Facades\Schema::hasColumn('accounts', 'role');
-        $isAdminRole     = $hasRoleColumn && strcasecmp($user->role ?? '', 'admin') === 0;
-        $isAdminUsername = \Illuminate\Support\Str::startsWith($usernameLower, 'admin');
+        $isAdmin = strcasecmp($user->role ?? '', 'admin') === 0
+            || str_starts_with(strtolower($user->username), 'admin');
 
-        $target = ($isAdminRole || $isAdminUsername)
-            ? route('admin.dashboard')
-            : route('home');
-
-        // redirect ke intended (jika sebelumnya akses halaman terproteksi) atau fallback target
-        return redirect()->intended($target);
+        return redirect()->intended(
+            $isAdmin ? route('admin.dashboard') : route('home')
+        );
     }
-
 
     public function logout(Request $request)
     {
