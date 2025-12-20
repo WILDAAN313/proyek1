@@ -96,7 +96,7 @@
                                                     @if (isset($u->is_active))
                                                         <span
                                                             class="badge {{ $u->is_active ? 'bg-success' : 'bg-secondary' }}">
-                                                            {{ $u->is_active ? 'Sedang Online' : ($u->last_login_at ? 'Pernah Login' : 'Belum Login') }}
+                                                            {{ $u->is_active ? 'Aktif' : ($u->last_login_at ? 'Non-Aktif' : 'Belum Login') }}
                                                         </span>
                                                     @else
                                                         <span class="badge bg-secondary">Status tidak tersedia</span>
@@ -104,7 +104,6 @@
                                                     @if ($u->last_login_at)
                                                         <small class="text-muted mt-1">
                                                             {{ $u->last_login_at->timezone('Asia/Jakarta')->locale('id')->translatedFormat('d F Y H:i') }}
-
                                                         </small>
                                                     @endif
                                                 </div>

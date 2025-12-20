@@ -7,6 +7,7 @@ use App\Models\Account;
 use App\Models\Menu;
 use App\Models\Artikel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
@@ -32,5 +33,24 @@ class AdminController extends Controller
             'menus',
             'latestUsers'
         ));
+    }
+
+    public function toggleStatus($id)
+    {
+        // if (! Session::has('role') || Session::get('role') !== 'admin') {
+        //     abort(403, 'Akses ditolak');
+        // }
+
+        $user = Account::findOrFail($id);
+
+        if ($user->role === 'admin') {
+            return back()->with('error', 'Tidak dapat mengubah status admin');
+        }
+
+        // $user->status = $user->status === 'aktif' ? 'nonaktif' : 'aktif';
+        $user->is_active = ! $user->is_active;
+        $user->save();
+
+        return back()->with('success', 'Status pengguna berhasil diperbarui');
     }
 }

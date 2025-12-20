@@ -67,13 +67,19 @@ class UserController extends Controller
 
         $request->validate([
             'nama_lengkap' => 'required',
-            'username'     => "required|unique:accounts,username,$id",
-            'email'        => "required|email|unique:accounts,email,$id",
-            'role'         => 'required',
-            'photo'        => 'nullable|image|max:2048',
+            'username' => "required|unique:accounts,username,$id",
+            'email' => "required|email|unique:accounts,email,$id",
+            'role' => 'required',
+            'photo' => 'nullable|image|max:2048',
         ]);
 
         $data = $request->except('photo');
+
+        if ($request->filled('password')) {
+            $data['password'] = Hash::make($request->password);
+        } else {
+            unset($data['password']);
+        }
 
         if ($request->password) {
             $data['password'] = Hash::make($request->password);
@@ -90,7 +96,7 @@ class UserController extends Controller
             }
 
             // simpan path lengkap yang dikembalikan Storage
-            $path = $request->file('photo')->store('profile', 'public'); // => "profile/xxx.jpg"
+            $path = $request->file('photo')->store('profile', 'public'); 
             $data['photo'] = $path;
         }
 

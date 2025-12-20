@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Account;
 
 class ProfileController extends Controller
 {
@@ -15,47 +16,38 @@ class ProfileController extends Controller
         $user = Auth::user();
         return view('pages.profile', compact('user', 'title'));
     }
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $user = Account::findOrFail($id);
+        $user = Account::findOrFail(Auth::id());
 
         $request->validate([
-            'nama_lengkap' => 'required',
-            'username' => "required|unique:accounts,username,$id",
-            'email' => "required|email|unique:accounts,email,$id",
-            'role' => 'required',
-            'photo' => 'nullable|image|max:2048',
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:accounts,email,' . $user->id,
+            'phone' => 'nullable|string|max:20',
+            'birthdate' => 'nullable|date',
+            'weight' => 'nullable|numeric',
+            'height' => 'nullable|numeric',
         ]);
 
-        $data = $request->except('photo');
-
-        if ($request->filled('password')) {
-            $data['password'] = Hash::make($request->password);
-        } else {
-            unset($data['password']);
-        }
-
-        if ($request->password) {
-            $data['password'] = Hash::make($request->password);
-        }
-
         if ($request->hasFile('photo')) {
-            // hapus file lama (cek beberapa kemungkinan format path)
-            if ($user->photo) {
-                if (Storage::disk('public')->exists($user->photo)) {
-                    Storage::disk('public')->delete($user->photo);
-                } elseif (Storage::disk('public')->exists('profile/' . $user->photo)) {
-                    Storage::disk('public')->delete('profile/' . $user->photo);
-                }
+            $path = $request->file('photo')->store('profile', 'public');
+
+            if ($user->photo && Storage::disk('public')->exists($user->photo)) {
+                Storage::disk('public')->delete($user->photo);
             }
 
-            // simpan path lengkap yang dikembalikan Storage
-            $path = $request->file('photo')->store('profile', 'public'); // => "profile/xxx.jpg"
-            $data['photo'] = $path;
+            $user->photo = $path;
         }
 
-        $user->update($data);
+        $user->nama_lengkap = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->birthdate = $request->birthdate;
+        $user->weight = $request->weight;
+        $user->height = $request->height;
+        $user->save();
 
-        return redirect()->route('admin.users.index')->with('success', 'Pengguna berhasil diperbarui.');
+        return back()->with('success', 'Profil berhasil diperbarui!');
     }
 }

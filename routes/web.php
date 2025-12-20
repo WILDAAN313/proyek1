@@ -55,3 +55,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('kategori', AdminKategoriController::class);
     Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
 });
+
+Route::post('/admin/users/{id}/toggle-status',[AdminController::class, 'toggleStatus']
+    )->name('admin.users.toggleStatus');
