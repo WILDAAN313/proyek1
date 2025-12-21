@@ -168,7 +168,7 @@
         </div>
     </section>
 
-    <section class="py-5">
+    {{-- <section class="py-5">
         <div class="container">
             <div class="row g-4">
                 <div class="col-lg-7">
@@ -246,7 +246,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <section class="cta-section text-center">
         <div class="container">

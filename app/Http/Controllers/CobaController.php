@@ -44,9 +44,9 @@ class CobaController extends Controller
             'title',
             'slug',
             'konten',
-            'featuredMenus',
-            'latestArticles',
-            'heroHighlight'
+            // 'featuredMenus',
+            // 'latestArticles',
+            // 'heroHighlight'
         ));
     }
 
