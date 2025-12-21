@@ -18,6 +18,11 @@ use App\Http\Controllers\GoogleController;
 //     return view('landing');
 // })->name('landing');
 
+// Route::get('/db-test', function () {
+//     return DB::select('SELECT 1');
+// });
+
+
 Route::get('/auth', function () {
     return view('auth.index');
 });

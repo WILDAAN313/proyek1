@@ -36,9 +36,9 @@ class CobaController extends Controller
         $slug = "home";
         $konten = "Selamat Datang di FitLife!";
 
-        $featuredMenus = CobaMenu::latest()->take(6)->get();
-        $latestArticles = CobaArtikel::latest()->take(4)->get();
-        $heroHighlight = $latestArticles->first();
+        // $featuredMenus = CobaMenu::latest()->take(6)->get();
+        // $latestArticles = CobaArtikel::latest()->take(4)->get();
+        // $heroHighlight = $latestArticles->first();
 
         return view('pages.home', compact(
             'title',
