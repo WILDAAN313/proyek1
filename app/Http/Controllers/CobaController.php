@@ -30,7 +30,22 @@ class CobaController extends Controller
 
     public function index()
     {
-        return 'Laravel Railway OK';
+        $title = "Home";
+        $slug = "home";
+        $konten = "Selamat Datang di FitLife!";
+
+        $featuredMenus = Menu::latest()->take(6)->get();
+        $latestArticles = Artikel::latest()->take(4)->get();
+        $heroHighlight = $latestArticles->first();
+
+        return view('pages.home', compact(
+            'title',
+            'slug',
+            'konten',
+            'featuredMenus',
+            'latestArticles',
+            'heroHighlight'
+        ));
     }
 
     public function kalkulator(Request $request)
