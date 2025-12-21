@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CobaController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\ProfileController;
@@ -30,7 +31,8 @@ Route::post('/auth/register', [AuthCustomController::class, 'register'])->name('
 Route::match(['GET', 'POST'], '/logout', [AuthCustomController::class, 'logout'])
     ->name('logout');
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+// Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [CobaController::class, 'index'])->name('home');
 Route::prefix('test')->group(function () {
     Route::put('/profile/update', [ProfileController::class, 'update'])->name('test.profile.update');
     Route::get('/profile', [ProfileController::class, 'halamanProfile'])->name('test.profile');
