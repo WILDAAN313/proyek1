@@ -8,24 +8,29 @@ use Illuminate\Http\Request;
 
 class CobaController extends Controller
 {
+    // public function index()
+    // {
+    //     $title = "Home";
+    //     $slug = "home";
+    //     $konten = "Selamat Datang di FitLife!";
+
+    //     $featuredMenus = Menu::latest()->take(6)->get();
+    //     $latestArticles = Artikel::latest()->take(4)->get();
+    //     $heroHighlight = $latestArticles->first();
+
+    //     return view('pages.home', compact(
+    //         'title',
+    //         'slug',
+    //         'konten',
+    //         'featuredMenus',
+    //         'latestArticles',
+    //         'heroHighlight'
+    //     ));
+    // }
+
     public function index()
     {
-        $title = "Home";
-        $slug = "home";
-        $konten = "Selamat Datang di FitLife!";
-
-        $featuredMenus = Menu::latest()->take(6)->get();
-        $latestArticles = Artikel::latest()->take(4)->get();
-        $heroHighlight = $latestArticles->first();
-
-        return view('pages.home', compact(
-            'title',
-            'slug',
-            'konten',
-            'featuredMenus',
-            'latestArticles',
-            'heroHighlight'
-        ));
+        return 'Laravel Railway OK';
     }
 
     public function kalkulator(Request $request)

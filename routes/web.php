@@ -14,9 +14,9 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\KategoriController as AdminKategoriController;
 use App\Http\Controllers\GoogleController;
 
-Route::get('/', function () {
-    return view('landing');
-})->name('landing');
+// Route::get('/', function () {
+//     return view('landing');
+// })->name('landing');
 
 Route::get('/auth', function () {
     return view('auth.index');
@@ -25,6 +25,10 @@ Route::get('/auth', function () {
 Route::get('/auth/google/redirect', [GoogleController::class, 'redirectToGoogle'])->name('auth.google.redirect');
 Route::get('/auth/google/callback',  [GoogleController::class, 'handleGoogleCallback'])->name('auth.google.callback');
 
+Route::get('/health', function () {
+    return 'OK';
+});
+
 Route::get('/login', [AuthCustomController::class, 'index'])->name('auth.index');
 Route::post('/auth/login', [AuthCustomController::class, 'login'])->name('auth.login');
 Route::post('/auth/register', [AuthCustomController::class, 'register'])->name('auth.register');
@@ -32,7 +36,7 @@ Route::match(['GET', 'POST'], '/logout', [AuthCustomController::class, 'logout']
     ->name('logout');
 
 // Route::get('/', [HomeController::class, 'index'])->name('home');
-// Route::get('/', [CobaController::class, 'index'])->name('home');
+Route::get('/', [CobaController::class, 'index'])->name('home');
 Route::prefix('test')->group(function () {
     Route::put('/profile/update', [ProfileController::class, 'update'])->name('test.profile.update');
     Route::get('/profile', [ProfileController::class, 'halamanProfile'])->name('test.profile');
